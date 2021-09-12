@@ -1,0 +1,68 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/Noto_Sans_JP/NotoSansJP-Regular.otf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 48
+font_data = ExtResource( 2 )
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 80.0
+margin_top = -110.0
+margin_right = 225.0
+margin_bottom = 110.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 20
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="startBtn" type="Button" parent="VBoxContainer"]
+margin_right = 145.0
+margin_bottom = 60.0
+focus_neighbour_top = NodePath("../quitBtn")
+size_flags_vertical = 3
+keep_pressed_outside = true
+text = "Start"
+
+[node name="optionsBtn" type="Button" parent="VBoxContainer"]
+margin_top = 80.0
+margin_right = 145.0
+margin_bottom = 140.0
+size_flags_vertical = 3
+text = "Options"
+
+[node name="quitBtn" type="Button" parent="VBoxContainer"]
+margin_top = 160.0
+margin_right = 145.0
+margin_bottom = 220.0
+focus_neighbour_bottom = NodePath("../startBtn")
+size_flags_vertical = 3
+text = "Quit"
+
+[node name="Label" type="Label" parent="."]
+margin_left = 534.863
+margin_top = 125.077
+margin_right = 797.863
+margin_bottom = 195.077
+custom_fonts/font = SubResource( 1 )
+text = "Countdown"
+align = 1
+
+[connection signal="pressed" from="VBoxContainer/startBtn" to="." method="_on_startBtn_pressed"]
+[connection signal="pressed" from="VBoxContainer/startBtn" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="VBoxContainer/optionsBtn" to="." method="_on_optionsBtn_pressed"]
+[connection signal="pressed" from="VBoxContainer/quitBtn" to="." method="_on_quitBtn_pressed"]
