@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/nature.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Room1.gd" type="Script" id=3]
 
 [node name="Room1" type="Node2D"]
+script = ExtResource( 3 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
@@ -13,3 +15,7 @@ tile_data = PoolIntArray( 1572875, 6, 0, 1572922, 0, 0, 1572923, 0, 1, 1572924, 
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 337.499, 419.01 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.8, 0.8 )
