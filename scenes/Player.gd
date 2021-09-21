@@ -14,10 +14,21 @@ func get_input():
 
 	if is_on_floor() and jump:
 		velocity.y = jump_speed
+		$AnimatedSprite.play("jump")
+	elif !is_on_floor():
+		$AnimatedSprite.play("fall")
+	
 	if right:
 		velocity.x += run_speed
-	if left:
+		$AnimatedSprite.play("run")
+		$AnimatedSprite.flip_h = false
+	elif left:
 		velocity.x -= run_speed
+		$AnimatedSprite.play("run")
+		$AnimatedSprite.flip_h = true
+	else:
+		$AnimatedSprite.play("idle")
+			
 
 func _physics_process(delta):
 	velocity.y += gravity * delta
