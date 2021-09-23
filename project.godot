@@ -28,11 +28,14 @@ config/icon="res://icon.png"
 
 GameState="*res://StateManager/GameState.gd"
 PlayerState="*res://StateManager/PlayerState.gd"
+Config="*res://Config.gd"
 
 [display]
 
-window/size/width=1366
-window/size/height=768
+window/size/width=640
+window/size/height=360
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
 
 [gdnative]
 
