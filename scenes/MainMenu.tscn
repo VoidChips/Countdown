@@ -61,6 +61,9 @@ margin_bottom = 195.077
 custom_fonts/font = SubResource( 1 )
 text = "Countdown"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="pressed" from="VBoxContainer/startBtn" to="." method="_on_startBtn_pressed"]
 [connection signal="pressed" from="VBoxContainer/startBtn" to="." method="_on_Button_pressed"]

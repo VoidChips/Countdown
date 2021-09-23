@@ -24,6 +24,11 @@ config/name="Countdown"
 run/main_scene="res://scenes/MainMenu.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GameState="*res://StateManager/GameState.gd"
+PlayerState="*res://StateManager/PlayerState.gd"
+
 [display]
 
 window/size/width=1366

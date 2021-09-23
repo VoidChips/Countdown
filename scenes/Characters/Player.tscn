@@ -8,7 +8,7 @@
 [ext_resource path="res://assets/characters/Individual Sprites/adventurer-run-04.png" type="Texture" id=6]
 [ext_resource path="res://assets/characters/Individual Sprites/adventurer-fall-00.png" type="Texture" id=7]
 [ext_resource path="res://assets/characters/Individual Sprites/adventurer-fall-01.png" type="Texture" id=8]
-[ext_resource path="res://scenes/Player.gd" type="Script" id=9]
+[ext_resource path="res://scenes/Characters/Player.gd" type="Script" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.37285

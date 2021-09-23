@@ -4,9 +4,13 @@ export var run_speed := 350
 export var jump_speed := -1000
 export var gravity := 2500
 
-var velocity = Vector2()
+onready var inventory := PlayerState.inventory
 
-func get_input():
+var velocity = Vector2()
+var isPoisoned := true
+
+# use input to move player
+func get_input() -> void:
 	velocity.x = 0
 	var right = Input.is_action_pressed('ui_right')
 	var left = Input.is_action_pressed('ui_left')
@@ -34,3 +38,13 @@ func _physics_process(delta):
 	velocity.y += gravity * delta
 	get_input()
 	velocity = move_and_slide(velocity, Vector2(0, -1))
+	
+	# detect collision
+	for i in get_slide_count():
+		var collision = get_slide_collision(i)
+		if collision:
+			var object = collision.collider
+			if object.name == "CurePotion":
+				inventory["cure potion"] = 100
+				object.queue_free()
+
