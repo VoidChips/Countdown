@@ -34,6 +34,7 @@ func get_input() -> void:
 	elif drink:
 		if "cure potion" in inventory:
 			isPoisoned = false
+			inventory.erase("cure potion")
 			print("drank potion!")
 	else:
 		$AnimatedSprite.play("idle")
