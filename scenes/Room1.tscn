@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/nature.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/Characters/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Room1.gd" type="Script" id=3]
 [ext_resource path="res://scenes/Items/CurePotion.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/PauseMenu.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/background/sky.png" type="Texture" id=6]
 
 [node name="Room1" type="Node2D"]
 script = ExtResource( 3 )
@@ -29,5 +30,12 @@ margin_left = -46.0
 margin_top = -26.0
 margin_right = 45.0
 margin_bottom = 26.0
+items = [ "Resume", null, 0, false, false, 0, 0, null, "", false, "Main Menu", null, 0, false, false, 1, 0, null, "", false ]
+
+[node name="Background" type="Sprite" parent="."]
+show_behind_parent = true
+position = Vector2( 440.056, 219.329 )
+scale = Vector2( 0.765655, 0.765655 )
+texture = ExtResource( 6 )
 
 [connection signal="id_pressed" from="PauseMenu" to="." method="_on_PauseMenu_id_pressed"]
