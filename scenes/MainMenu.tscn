@@ -30,30 +30,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="startBtn" type="Button" parent="VBoxContainer"]
+[node name="StartBtn" type="Button" parent="VBoxContainer"]
 margin_right = 145.0
 margin_bottom = 59.0
-focus_neighbour_top = NodePath("../quitBtn")
+focus_neighbour_top = NodePath("../QuitBtn")
 size_flags_vertical = 3
 keep_pressed_outside = true
 text = "Start"
 
-[node name="optionsBtn" type="Button" parent="VBoxContainer"]
+[node name="OptionsBtn" type="Button" parent="VBoxContainer"]
 margin_top = 79.0
 margin_right = 145.0
 margin_bottom = 139.0
 size_flags_vertical = 3
 text = "Options"
 
-[node name="quitBtn" type="Button" parent="VBoxContainer"]
+[node name="QuitBtn" type="Button" parent="VBoxContainer"]
 margin_top = 159.0
 margin_right = 145.0
 margin_bottom = 219.0
-focus_neighbour_bottom = NodePath("../startBtn")
+focus_neighbour_bottom = NodePath("../StartBtn")
 size_flags_vertical = 3
 text = "Quit"
 
-[node name="Label" type="Label" parent="."]
+[node name="Title" type="Label" parent="."]
 margin_left = 272.643
 margin_top = 70.0
 margin_right = 535.643
@@ -65,7 +65,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="VBoxContainer/startBtn" to="." method="_on_Button_pressed"]
-[connection signal="pressed" from="VBoxContainer/startBtn" to="." method="_on_startBtn_pressed"]
-[connection signal="pressed" from="VBoxContainer/optionsBtn" to="." method="_on_optionsBtn_pressed"]
-[connection signal="pressed" from="VBoxContainer/quitBtn" to="." method="_on_quitBtn_pressed"]
+[connection signal="pressed" from="VBoxContainer/StartBtn" to="." method="_on_StartBtn_pressed"]
+[connection signal="pressed" from="VBoxContainer/OptionsBtn" to="." method="_on_OptionsBtn_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitBtn" to="." method="_on_QuitBtn_pressed"]
