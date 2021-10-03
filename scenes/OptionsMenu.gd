@@ -25,7 +25,7 @@ func _ready():
 
 # disable resolutions if they are less than the display resolution
 func disable_invalid_resolutions():
-	var screen_size = OS.get_screen_size()
+	var screen_size := OS.get_screen_size()
 	
 	for i in range(1, 3):
 		if screen_size[0] < 640 * (i + 1) and screen_size[1] < 360 * (i + 1):

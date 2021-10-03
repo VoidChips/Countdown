@@ -12,9 +12,10 @@ var isPoisoned := true
 # use input to move player
 func get_input() -> void:
 	velocity.x = 0
-	var right = Input.is_action_pressed('ui_right')
-	var left = Input.is_action_pressed('ui_left')
-	var jump = Input.is_action_just_pressed('ui_select')
+	var right := Input.is_action_pressed('ui_right')
+	var left := Input.is_action_pressed('ui_left')
+	var jump := Input.is_action_just_pressed("jump")
+	var drink := Input.is_action_just_pressed("drink")
 
 	if is_on_floor() and jump:
 		velocity.y = jump_speed
@@ -30,6 +31,10 @@ func get_input() -> void:
 		velocity.x -= run_speed
 		$AnimatedSprite.play("run")
 		$AnimatedSprite.flip_h = true
+	elif drink:
+		if "cure potion" in inventory:
+			isPoisoned = false
+			print("drank potion!")
 	else:
 		$AnimatedSprite.play("idle")
 			
