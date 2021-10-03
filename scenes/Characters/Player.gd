@@ -7,7 +7,8 @@ export var gravity := 2500
 onready var inventory := PlayerState.inventory
 
 var velocity = Vector2()
-var isPoisoned := true
+var is_poisoned := true
+var is_dead := false
 
 # use input to move player
 func get_input() -> void:
@@ -16,6 +17,9 @@ func get_input() -> void:
 	var left := Input.is_action_pressed('ui_left')
 	var jump := Input.is_action_just_pressed("jump")
 	var drink := Input.is_action_just_pressed("drink")
+
+	if is_dead:
+		return
 
 	if is_on_floor() and jump:
 		velocity.y = jump_speed
@@ -33,9 +37,8 @@ func get_input() -> void:
 		$AnimatedSprite.flip_h = true
 	elif drink:
 		if "cure potion" in inventory:
-			isPoisoned = false
+			is_poisoned = false
 			inventory.erase("cure potion")
-			print("drank potion!")
 	else:
 		$AnimatedSprite.play("idle")
 			
