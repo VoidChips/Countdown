@@ -10,7 +10,7 @@ var velocity = Vector2()
 var is_poisoned := true
 var is_dead := false
 
-# use input to move player
+# use input to handle player movement and action
 func get_input() -> void:
 	velocity.x = 0
 	var right := Input.is_action_pressed('ui_right')
@@ -24,23 +24,29 @@ func get_input() -> void:
 	if is_on_floor() and jump:
 		velocity.y = jump_speed
 		$AnimatedSprite.play("jump")
-	elif !is_on_floor():
+	elif not is_on_floor():
 		$AnimatedSprite.play("fall")
 	
 	if right:
 		velocity.x += run_speed
-		$AnimatedSprite.play("run")
 		$AnimatedSprite.flip_h = false
+		
+		if is_on_floor():
+			$AnimatedSprite.play("walk")
 	elif left:
 		velocity.x -= run_speed
-		$AnimatedSprite.play("run")
 		$AnimatedSprite.flip_h = true
-	elif drink:
+		
+		if is_on_floor():
+			$AnimatedSprite.play("walk")
+	else:
+		$AnimatedSprite.play("idle")
+	
+	if drink:
 		if "cure potion" in inventory:
 			is_poisoned = false
 			inventory.erase("cure potion")
-	else:
-		$AnimatedSprite.play("idle")
+
 			
 
 func _physics_process(delta):
