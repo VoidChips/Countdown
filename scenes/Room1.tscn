@@ -27,9 +27,6 @@ position = Vector2( 222.232, 180.336 )
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 
-[node name="CurePotion" parent="." instance=ExtResource( 4 )]
-position = Vector2( 851.84, 153.947 )
-
 [node name="PauseMenu" parent="." instance=ExtResource( 5 )]
 margin_left = -46.0
 margin_top = -26.0
@@ -54,6 +51,9 @@ custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="CurePotion" parent="." instance=ExtResource( 4 )]
+position = Vector2( 847.597, 147.453 )
 
 [connection signal="id_pressed" from="PauseMenu" to="." method="_on_PauseMenu_id_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

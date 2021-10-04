@@ -24,7 +24,7 @@ __meta__ = {
 }
 
 [node name="ResolutionOption" type="HSplitContainer" parent="Options"]
-margin_right = 109.0
+margin_right = 180.0
 margin_bottom = 20.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -32,21 +32,21 @@ __meta__ = {
 
 [node name="ResolutionLbl" type="Label" parent="Options/ResolutionOption"]
 margin_top = 3.0
-margin_right = 68.0
+margin_right = 139.0
 margin_bottom = 17.0
-text = "Resolution"
+text = "Windowed Resolution"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ResolutionBtn" type="OptionButton" parent="Options/ResolutionOption"]
-margin_left = 80.0
-margin_right = 109.0
+margin_left = 151.0
+margin_right = 180.0
 margin_bottom = 20.0
 
 [node name="FullscreenOption" type="HSplitContainer" parent="Options"]
 margin_top = 24.0
-margin_right = 109.0
+margin_right = 180.0
 margin_bottom = 48.0
 
 [node name="FullscreenLbl" type="Label" parent="Options/FullscreenOption"]
@@ -57,12 +57,12 @@ text = "Fullscreen"
 
 [node name="FullscreenCheckBox" type="CheckBox" parent="Options/FullscreenOption"]
 margin_left = 78.0
-margin_right = 109.0
+margin_right = 180.0
 margin_bottom = 24.0
 
 [node name="ConfirmBtn" type="Button" parent="Options"]
 margin_top = 52.0
-margin_right = 109.0
+margin_right = 180.0
 margin_bottom = 72.0
 text = "Confirm"
 

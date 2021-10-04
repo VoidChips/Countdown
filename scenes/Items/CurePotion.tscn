@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://assets/items/cure potion.png" type="Texture" id=2]
+[ext_resource path="res://assets/items/potions.png" type="Texture" id=1]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 4.65673
-height = 3.99592
+radius = 7.24274
+height = 12.3472
 
 [node name="CurePotion" type="StaticBody2D"]
 
@@ -14,4 +14,6 @@ shape = SubResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, 4.76837e-07 )
 scale = Vector2( 0.305543, 0.305543 )
-texture = ExtResource( 2 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 24, 6, 48, 90 )
