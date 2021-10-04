@@ -16,23 +16,63 @@ func _ready():
 	resolution_btn.add_item("2560x1440")
 	resolution_btn.add_item("3840x2160")
 	
-	disable_invalid_resolutions()
+	if is_fullscreen:
+		disable_all_resolutions()
+		resolution_btn.text = ""
+	else:
+		disable_invalid_resolutions()
+		
 	select_current_resolution()
 	confirm_btn.disabled = true
 	
 	print("resolution: " + str(resolution))
 	print("fullscreen: " + str(is_fullscreen))
 
+# get the resolution from text
+func get_resolution(var s : String) -> Array:
+	var res : Array
+	var delimiter_pos : int
+	var left : int
+	var right : int
+		
+	delimiter_pos = s.find("x")
+	left = int(s.left(delimiter_pos))
+	right = int(s.right(delimiter_pos))
+	
+	res.append(left)
+	res.append(right)
+		
+	print(str(res[0]) + " " + str(res[1]))
+	
+	return res
+	
+
 # disable resolutions if they are less than the display resolution
 func disable_invalid_resolutions():
 	var screen_size := OS.get_screen_size()
 	
-	for i in range(1, 3):
-		if screen_size[0] < 640 * (i + 1) and screen_size[1] < 360 * (i + 1):
-			resolution_btn.set_item_disabled(i, true)
+	for i in resolution_btn.get_item_count():
+		var res_text = resolution_btn.get_item_text(i)
+		var res := get_resolution(res_text)
+		
+		if screen_size[0] < res[0] and screen_size[1] < res[1]:
+			resolution_btn.set_item_disabled(i, false)
 
-	if screen_size[0] < 3840 and screen_size[1] < 2160:
-		resolution_btn.set_item_disabled(4, true)
+# enable resolutions if they are valid
+func enable_valid_resolutions():
+	var screen_size := OS.get_screen_size()
+	
+	for i in resolution_btn.get_item_count():
+		var res_text = resolution_btn.get_item_text(i)
+		var res := get_resolution(res_text)
+		
+		if screen_size[0] >= res[0] and screen_size[1] >= res[1]:
+			resolution_btn.set_item_disabled(i, false)
+
+# disable all resolutions in the list
+func disable_all_resolutions():
+	for i in resolution_btn.get_item_count():
+		resolution_btn.set_item_disabled(i, true)
 	
 # select current resolution of the game	
 func select_current_resolution():
@@ -47,9 +87,6 @@ func select_current_resolution():
 			resolution_btn.select(3)
 		Vector2(3840, 2160):
 			resolution_btn.select(4)
-
-func _process(delta):
-	pass
 
 # change the resolution
 func _on_ResolutionBtn_item_selected(index):
@@ -73,11 +110,17 @@ func _on_FullscreenCheckBox_toggled(button_pressed):
 	is_fullscreen = !is_fullscreen
 	confirm_btn.disabled = false
 	print("fullscreen: " + str(is_fullscreen))
+	
+	if is_fullscreen:
+		disable_all_resolutions()
+	else:
+		enable_valid_resolutions()
 
 # apply changes
 func _on_ConfirmBtn_pressed():
-	OS.window_size = resolution
+	select_current_resolution()
 	OS.window_fullscreen = is_fullscreen
+	OS.window_size = resolution
 	
 	Config.window_size = resolution
 	Config.is_fullscreen = is_fullscreen

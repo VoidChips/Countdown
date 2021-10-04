@@ -1,8 +1,8 @@
 extends Control
 
 func _ready():
-	OS.window_size = Config.window_size
 	OS.window_fullscreen = Config.is_fullscreen
+	OS.window_size = Config.window_size
 	
 	$VBoxContainer/StartBtn.grab_focus()
 
