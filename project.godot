@@ -26,7 +26,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-GameState="*res://StateManager/GameState.gd"
+Game="*res://StateManager/Game.gd"
 PlayerState="*res://StateManager/PlayerState.gd"
 Config="*res://Config.gd"
 
