@@ -9,6 +9,7 @@ onready var inventory := PlayerState.inventory
 var velocity = Vector2()
 var is_poisoned := true
 var is_dead := false
+var is_jumping := false
 
 # use input to handle player movement and action
 func get_input() -> void:
@@ -18,15 +19,20 @@ func get_input() -> void:
 	var jump := Input.is_action_just_pressed("jump")
 	var drink := Input.is_action_just_pressed("drink")
 
+	# don't process input if the player is dead
 	if is_dead:
 		return
 
+	# jump if the player pressed the jump button from the ground
+	# fall if the player is in the air but not jumping
 	if is_on_floor() and jump:
 		velocity.y = jump_speed
+		is_jumping = true
 		$AnimatedSprite.play("jump")
-	elif not is_on_floor():
+	elif not is_on_floor() and not is_jumping:
 		$AnimatedSprite.play("fall")
 	
+	# move right or left
 	if right:
 		velocity.x += run_speed
 		$AnimatedSprite.flip_h = false
@@ -39,9 +45,10 @@ func get_input() -> void:
 		
 		if is_on_floor():
 			$AnimatedSprite.play("walk")
-	else:
+	elif is_on_floor():
 		$AnimatedSprite.play("idle")
 	
+	# drink potion
 	if drink:
 		if inventory["cure potion"] == 100:
 			is_poisoned = false
@@ -51,6 +58,15 @@ func get_input() -> void:
 
 func _physics_process(delta):
 	velocity.y += gravity * delta
+	
+	# play the jumping animation when jumping until player starts to fall
+	if is_jumping:
+		$AnimatedSprite.play("jump")
+		if velocity.y > 0.0:
+			is_jumping = false
+			$AnimatedSprite.play("fall")
+			
+			
 	get_input()
 	velocity = move_and_slide(velocity, Vector2(0, -1))
 	
