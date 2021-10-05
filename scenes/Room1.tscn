@@ -57,3 +57,4 @@ position = Vector2( 847.597, 147.453 )
 
 [connection signal="id_pressed" from="PauseMenu" to="." method="_on_PauseMenu_id_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="body_entered" from="CurePotion" to="." method="_on_CurePotion_body_entered"]

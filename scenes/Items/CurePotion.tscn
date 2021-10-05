@@ -6,7 +6,7 @@
 radius = 7.24274
 height = 12.3472
 
-[node name="CurePotion" type="StaticBody2D"]
+[node name="CurePotion" type="Area2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

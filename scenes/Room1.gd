@@ -5,6 +5,7 @@ onready var camera := $Camera2D
 onready var pause_menu := $PauseMenu
 onready var timer := $Timer
 onready var time_lbl := $TimeLbl
+onready var cure_potion := $CurePotion
 
 var remaining_time := 10.0
 
@@ -61,4 +62,8 @@ func _on_Timer_timeout():
 		timer.stop()
 		if player.is_poisoned:
 			player.is_dead = true
-			
+
+func _on_CurePotion_body_entered(body):
+	if (body.get_name() == "Player"):
+		player.inventory["cure potion"] = 100
+		cure_potion.queue_free()

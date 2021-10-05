@@ -43,7 +43,7 @@ func get_input() -> void:
 		$AnimatedSprite.play("idle")
 	
 	if drink:
-		if "cure potion" in inventory:
+		if inventory["cure potion"] == 100:
 			is_poisoned = false
 			inventory.erase("cure potion")
 
@@ -55,11 +55,8 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector2(0, -1))
 	
 	# detect collision
-	for i in get_slide_count():
-		var collision = get_slide_collision(i)
-		if collision:
-			var object = collision.collider
-			if object.name == "CurePotion":
-				inventory["cure potion"] = 100
-				object.queue_free()
+#	for i in get_slide_count():
+#		var collision = get_slide_collision(i)
+#		if collision:
+#			var object = collision.collider
 
