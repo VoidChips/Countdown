@@ -4,8 +4,10 @@ onready var resolution_btn := $Options/ResolutionOption/ResolutionBtn
 onready var fullscreen_checkbox := $Options/FullscreenOption/FullscreenCheckBox
 onready var confirm_btn := $Options/ConfirmBtn
 onready var options := $Options
-onready var resolution := Config.window_size
-onready var is_fullscreen := Config.is_fullscreen
+onready var settings := Config.get_settings()
+onready var resolution = settings["screen"]["window_size"]
+onready var is_fullscreen = settings["screen"]["is_fullscreen"]
+
 
 func _ready():
 	options.alignment = BoxContainer.ALIGN_CENTER
@@ -27,6 +29,7 @@ func _ready():
 	
 	print("resolution: " + str(resolution))
 	print("fullscreen: " + str(is_fullscreen))
+
 
 # get the resolution from text
 func get_resolution(var s : String) -> Array:
@@ -58,6 +61,7 @@ func disable_invalid_resolutions():
 		if screen_size[0] < res[0] and screen_size[1] < res[1]:
 			resolution_btn.set_item_disabled(i, false)
 
+
 # enable resolutions if they are valid
 func enable_valid_resolutions():
 	var screen_size := OS.get_screen_size()
@@ -69,10 +73,12 @@ func enable_valid_resolutions():
 		if screen_size[0] >= res[0] and screen_size[1] >= res[1]:
 			resolution_btn.set_item_disabled(i, false)
 
+
 # disable all resolutions in the list
 func disable_all_resolutions():
 	for i in resolution_btn.get_item_count():
 		resolution_btn.set_item_disabled(i, true)
+	
 	
 # select current resolution of the game	
 func select_current_resolution():
@@ -87,6 +93,7 @@ func select_current_resolution():
 			resolution_btn.select(3)
 		Vector2(3840, 2160):
 			resolution_btn.select(4)
+
 
 # change the resolution
 func _on_ResolutionBtn_item_selected(index):
@@ -105,6 +112,7 @@ func _on_ResolutionBtn_item_selected(index):
 	confirm_btn.disabled = false
 	print("resolution: " + str(resolution))
 
+
 # toggle fullscreen
 func _on_FullscreenCheckBox_toggled(button_pressed):
 	is_fullscreen = !is_fullscreen
@@ -116,16 +124,20 @@ func _on_FullscreenCheckBox_toggled(button_pressed):
 	else:
 		enable_valid_resolutions()
 
+
 # apply changes
 func _on_ConfirmBtn_pressed():
 	select_current_resolution()
 	OS.window_fullscreen = is_fullscreen
 	OS.window_size = resolution
 	
-	Config.window_size = resolution
-	Config.is_fullscreen = is_fullscreen
+	settings["screen"]["window_size"] = resolution
+	settings["screen"]["is_fullscreen"] = is_fullscreen
+	Config.set_settings(settings)
+	Config.save_settings()
 	
 	confirm_btn.disabled = true
+
 
 # return to main menu
 func _on_BackBtn_pressed():

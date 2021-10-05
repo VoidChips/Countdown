@@ -11,6 +11,7 @@ var is_poisoned := true
 var is_dead := false
 var is_jumping := false
 
+
 # use input to handle player movement and action
 func get_input() -> void:
 	velocity.x = 0
@@ -54,7 +55,6 @@ func get_input() -> void:
 			is_poisoned = false
 			inventory.erase("cure potion")
 
-			
 
 func _physics_process(delta):
 	velocity.y += gravity * delta
@@ -65,7 +65,6 @@ func _physics_process(delta):
 		if velocity.y > 0.0:
 			is_jumping = false
 			$AnimatedSprite.play("fall")
-			
 			
 	get_input()
 	velocity = move_and_slide(velocity, Vector2(0, -1))

@@ -11,6 +11,7 @@ var remaining_time := 10.0
 
 const spawn_point = Vector2(222, 177)
 
+
 func _ready():
 	player.position = spawn_point
 	camera.position = spawn_point
@@ -42,9 +43,11 @@ func _process(delta):
 		
 	if player.is_dead:
 		game_over()
-		
+
+
 func game_over():
 	time_lbl.text = "You didn't make it..."
+
 
 # define pause menu actions
 func _on_PauseMenu_id_pressed(id):
@@ -54,6 +57,7 @@ func _on_PauseMenu_id_pressed(id):
 	else:
 		get_tree().change_scene("res://scenes/MainMenu.tscn")
 
+
 func _on_Timer_timeout():
 	remaining_time = remaining_time - 1.0
 	time_lbl.text = str(remaining_time)
@@ -62,6 +66,7 @@ func _on_Timer_timeout():
 		timer.stop()
 		if player.is_poisoned:
 			player.is_dead = true
+
 
 func _on_CurePotion_body_entered(body):
 	if (body.get_name() == "Player"):
