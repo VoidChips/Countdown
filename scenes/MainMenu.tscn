@@ -16,7 +16,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Buttons" type="VBoxContainer" parent="."]
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = 59.1889
@@ -31,7 +31,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StartBtn" type="Button" parent="VBoxContainer"]
+[node name="StartBtn" type="Button" parent="Buttons"]
 margin_right = 145.0
 margin_bottom = 59.0
 focus_neighbour_top = NodePath("../QuitBtn")
@@ -39,14 +39,14 @@ size_flags_vertical = 3
 keep_pressed_outside = true
 text = "Start"
 
-[node name="OptionsBtn" type="Button" parent="VBoxContainer"]
+[node name="OptionsBtn" type="Button" parent="Buttons"]
 margin_top = 79.0
 margin_right = 145.0
 margin_bottom = 139.0
 size_flags_vertical = 3
 text = "Options"
 
-[node name="QuitBtn" type="Button" parent="VBoxContainer"]
+[node name="QuitBtn" type="Button" parent="Buttons"]
 margin_top = 159.0
 margin_right = 145.0
 margin_bottom = 219.0
@@ -71,6 +71,6 @@ show_behind_parent = true
 position = Vector2( 320.494, 181.117 )
 texture = ExtResource( 3 )
 
-[connection signal="pressed" from="VBoxContainer/StartBtn" to="." method="_on_StartBtn_pressed"]
-[connection signal="pressed" from="VBoxContainer/OptionsBtn" to="." method="_on_OptionsBtn_pressed"]
-[connection signal="pressed" from="VBoxContainer/QuitBtn" to="." method="_on_QuitBtn_pressed"]
+[connection signal="pressed" from="Buttons/StartBtn" to="." method="_on_StartBtn_pressed"]
+[connection signal="pressed" from="Buttons/OptionsBtn" to="." method="_on_OptionsBtn_pressed"]
+[connection signal="pressed" from="Buttons/QuitBtn" to="." method="_on_QuitBtn_pressed"]

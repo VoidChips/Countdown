@@ -5,7 +5,7 @@ func _ready():
 	OS.window_fullscreen = settings["screen"]["is_fullscreen"]
 	OS.window_size = settings["screen"]["window_size"]
 	
-	$VBoxContainer/StartBtn.grab_focus()
+	$Buttons/StartBtn.grab_focus()
 
 
 func _on_StartBtn_pressed():

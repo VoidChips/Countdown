@@ -3,7 +3,7 @@ extends Node
 const SAVE_PATH = "res://config.cfg"
 
 var _config_file = ConfigFile.new()
-var _settings = {
+var _settings := {
 	"screen": {
 		"window_size" : Vector2(1280, 720),
 		"is_fullscreen" : false,
@@ -16,12 +16,19 @@ func _ready():
 	save_settings()
 
 
+# get all settings
 func get_settings() -> Dictionary:
 	return _settings
 
 
+# set all settings
 func set_settings(d : Dictionary) -> void:
 	_settings = d
+	
+
+# set a setting
+func set_setting(section : String, key : String, value) -> void:
+	_settings[section][key] = value
 
 
 # load settings from the config file

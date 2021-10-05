@@ -13,7 +13,7 @@ outline_size = 1
 font_data = ExtResource( 7 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 740.043, 13.8266 )
+extents = Vector2( 858.934, 33.5746 )
 
 [node name="Room1" type="Node2D"]
 script = ExtResource( 3 )
@@ -58,14 +58,14 @@ __meta__ = {
 [node name="CurePotion" parent="." instance=ExtResource( 4 )]
 position = Vector2( 847.597, 147.453 )
 
-[node name="RespawnArea" type="Area2D" parent="."]
+[node name="RespawnTrigger" type="Area2D" parent="."]
 position = Vector2( 497.251, 378.831 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RespawnArea"]
-position = Vector2( -40.7125, 7.41626 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RespawnTrigger"]
+position = Vector2( -38.4676, 28.743 )
 shape = SubResource( 2 )
 
 [connection signal="id_pressed" from="PauseMenu" to="." method="_on_PauseMenu_id_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="body_entered" from="CurePotion" to="." method="_on_CurePotion_body_entered"]
-[connection signal="body_entered" from="RespawnArea" to="." method="_on_RespawnArea_body_entered"]
+[connection signal="body_entered" from="RespawnTrigger" to="." method="_on_RespawnTrigger_body_entered"]

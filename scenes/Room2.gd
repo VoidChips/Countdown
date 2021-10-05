@@ -9,7 +9,7 @@ onready var cure_potion := $CurePotion
 
 var remaining_time := 10.0
 
-const spawn_point = Vector2(222, 177)
+const spawn_point = Vector2(93, 65)
 
 
 func _ready():
@@ -23,8 +23,7 @@ func _ready():
 		"remaining_time": remaining_time,
 	}
 	
-	Game.set_status("is_new_game", false)
-	Game.set_status("current_room", "res://scenes/Room1.tscn")
+	Game.set_status("current_room", "res://scenes/Room2.tscn")
 	Game.setup_room(nodes)
 	
 	
@@ -35,7 +34,7 @@ func _process(delta):
 	time_lbl.set_position(Vector2(player.position.x, player.position.y - 50))
 		
 	Game.pause_input_check(pause_menu)
-	Game.check_player_status(player, timer, time_lbl, "res://scenes/Room2.tscn")
+	Game.check_player_status(player, timer, time_lbl, "res://scenes/GameOverScreen.tscn")
 
 
 # define pause menu actions

@@ -131,9 +131,8 @@ func _on_ConfirmBtn_pressed():
 	OS.window_fullscreen = is_fullscreen
 	OS.window_size = resolution
 	
-	settings["screen"]["window_size"] = resolution
-	settings["screen"]["is_fullscreen"] = is_fullscreen
-	Config.set_settings(settings)
+	Config.set_setting("screen", "window_size", resolution)
+	Config.set_setting("screen", "is_fullscreen", is_fullscreen)
 	Config.save_settings()
 	
 	confirm_btn.disabled = true

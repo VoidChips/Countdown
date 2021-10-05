@@ -1,8 +1,23 @@
 extends Node
 
+var _status := {
+	"is_new_game": true,
+	"current_room": "res://scenes/Room1.tscn",
+}
+
+
+# return all status information
+func get_status() -> Dictionary:
+	return _status
+	
+
+# set a status
+func set_status(key : String, value):
+	_status[key] = value
+
 
 # setup scene at the beginning
-func setup_scene(nodes : Dictionary) -> void:
+func setup_room(nodes : Dictionary) -> void:
 	var player = nodes["player"]
 	var camera = nodes["camera"]
 	var pause_menu = nodes["pause_menu"]
@@ -18,12 +33,15 @@ func setup_scene(nodes : Dictionary) -> void:
 	time_lbl.text = str(remaining_time)
 	timer.start()
 	
+	print("is_new_game: " + str(_status["is_new_game"]))
+	print("current_room: " + _status["current_room"])
+	
 
-func check_player_status(player, timer : Timer, time_lbl : Label) -> void:
+func check_player_status(player, timer : Timer, time_lbl : Label, scene : String) -> void:
 	if not player.is_poisoned:
 		timer.stop()
 		time_lbl.text = ""
-		get_tree().change_scene("res://scenes/Room2.tscn")
+		get_tree().change_scene(scene)
 		
 	if player.is_dead:
 		game_over(time_lbl)
