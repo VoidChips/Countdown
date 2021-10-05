@@ -5,6 +5,13 @@ var _status := {
 	"current_room": "res://scenes/Room1.tscn",
 }
 
+const SAVE_DIR = "user://saves/"
+const SAVE_PATH = SAVE_DIR + "save.dat"
+
+
+func _ready():
+	load_game()
+
 
 # return all status information
 func get_status() -> Dictionary:
@@ -14,6 +21,35 @@ func get_status() -> Dictionary:
 # set a status
 func set_status(key : String, value):
 	_status[key] = value
+
+
+# load game data from the save file
+func load_game() -> void:
+	var file = File.new()
+	if file.file_exists(SAVE_PATH):
+		var error = file.open_encrypted_with_pass(SAVE_PATH, File.READ, Secret.password)
+		if error != OK:
+			print("Unable to open config.cfg. Error code: %s" % error)
+			return
+		_status = file.get_var()
+	
+	file.close()
+
+
+# save game data to the save file
+func save_game() -> void:
+	var dir = Directory.new()
+	if not dir.dir_exists(SAVE_DIR):
+		dir.make_dir_recursive(SAVE_DIR)
+	
+	
+	var file = File.new()
+	var error = file.open_encrypted_with_pass(SAVE_PATH, File.WRITE, Secret.password)
+	if error != OK:
+		print("Unable to open config.cfg. Error code: %s" % error)
+		return
+	file.store_var(_status)
+	file.close()
 
 
 # setup scene at the beginning
@@ -26,6 +62,8 @@ func setup_room(nodes : Dictionary) -> void:
 	var timer = nodes["timer"]
 	var remaining_time = nodes["remaining_time"]
 	
+	save_game()
+	
 	player.position = spawn_point
 	camera.position = spawn_point
 	pause_menu.set_position(spawn_point)
@@ -33,10 +71,8 @@ func setup_room(nodes : Dictionary) -> void:
 	time_lbl.text = str(remaining_time)
 	timer.start()
 	
-	print("is_new_game: " + str(_status["is_new_game"]))
-	print("current_room: " + _status["current_room"])
-	
 
+# check the status of the player and act accordingly
 func check_player_status(player, timer : Timer, time_lbl : Label, scene : String) -> void:
 	if not player.is_poisoned:
 		timer.stop()

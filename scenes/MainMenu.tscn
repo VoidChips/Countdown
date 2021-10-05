@@ -31,23 +31,37 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StartBtn" type="Button" parent="Buttons"]
+[node name="NewGameBtn" type="Button" parent="Buttons"]
 margin_right = 145.0
-margin_bottom = 59.0
+margin_bottom = 39.0
+rect_pivot_offset = Vector2( -235.407, -35.9795 )
 focus_neighbour_top = NodePath("../QuitBtn")
 size_flags_vertical = 3
 keep_pressed_outside = true
 text = "Start"
 
-[node name="OptionsBtn" type="Button" parent="Buttons"]
-margin_top = 79.0
+[node name="ContinueBtn" type="Button" parent="Buttons"]
+margin_top = 59.0
 margin_right = 145.0
-margin_bottom = 139.0
+margin_bottom = 99.0
+rect_pivot_offset = Vector2( -235.407, -35.9795 )
+focus_neighbour_top = NodePath("../QuitBtn")
+size_flags_vertical = 3
+keep_pressed_outside = true
+text = "Continue"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OptionsBtn" type="Button" parent="Buttons"]
+margin_top = 119.0
+margin_right = 145.0
+margin_bottom = 159.0
 size_flags_vertical = 3
 text = "Options"
 
 [node name="QuitBtn" type="Button" parent="Buttons"]
-margin_top = 159.0
+margin_top = 179.0
 margin_right = 145.0
 margin_bottom = 219.0
 focus_neighbour_bottom = NodePath("../StartBtn")
@@ -71,6 +85,8 @@ show_behind_parent = true
 position = Vector2( 320.494, 181.117 )
 texture = ExtResource( 3 )
 
-[connection signal="pressed" from="Buttons/StartBtn" to="." method="_on_StartBtn_pressed"]
+[connection signal="pressed" from="Buttons/NewGameBtn" to="." method="_on_StartBtn_pressed"]
+[connection signal="pressed" from="Buttons/NewGameBtn" to="." method="_on_NewGameBtn_pressed"]
+[connection signal="pressed" from="Buttons/ContinueBtn" to="." method="_on_ContinueBtn_pressed"]
 [connection signal="pressed" from="Buttons/OptionsBtn" to="." method="_on_OptionsBtn_pressed"]
 [connection signal="pressed" from="Buttons/QuitBtn" to="." method="_on_QuitBtn_pressed"]

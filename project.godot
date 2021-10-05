@@ -22,6 +22,7 @@ _global_script_class_icons={
 
 config/name="Countdown"
 run/main_scene="res://scenes/MainMenu.tscn"
+config/use_custom_user_dir=true
 config/icon="res://icon.png"
 
 [autoload]
@@ -29,6 +30,7 @@ config/icon="res://icon.png"
 Game="*res://StateManager/Game.gd"
 PlayerState="*res://StateManager/PlayerState.gd"
 Config="*res://Config.gd"
+Secret="*res://Secret.gd"
 
 [display]
 
