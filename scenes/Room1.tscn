@@ -42,6 +42,9 @@ show_behind_parent = true
 position = Vector2( 440.056, 219.329 )
 scale = Vector2( 0.765655, 0.765655 )
 texture = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Timer" type="Timer" parent="."]
 
@@ -56,7 +59,7 @@ __meta__ = {
 }
 
 [node name="CurePotion" parent="." instance=ExtResource( 4 )]
-position = Vector2( 847.597, 147.453 )
+position = Vector2( 847.597, 154.953 )
 
 [node name="RespawnTrigger" type="Area2D" parent="."]
 position = Vector2( 497.251, 378.831 )
