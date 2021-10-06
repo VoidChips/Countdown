@@ -48,7 +48,7 @@ func _on_Timer_timeout():
 
 
 func _on_CurePotion_body_entered(body):
-	Game.handle_potion_collision(body, player, cure_potion, "Cure Potion")
+	Game.handle_potion_collision(body, player, cure_potion, "cure potion")
 
 
 # respawn player if it fell off map

@@ -77,11 +77,17 @@ func check_player_status(player, timer : Timer, time_lbl : Label, scene : String
 	if not player.is_poisoned:
 		timer.stop()
 		time_lbl.text = ""
-		get_tree().change_scene(scene)
+		change_room(player, scene)
 		
 	if player.is_dead:
 		game_over(time_lbl)
 
+
+# change scene after saving player's inventory
+func change_room(player, scene : String) -> void:
+	PlayerState.set_items(player.inventory)
+	get_tree().change_scene(scene)
+	
 
 # handle game over actions
 func game_over(time_lbl : Label) -> void:
@@ -123,5 +129,5 @@ func handle_timeout(player, time_lbl : Label, timer : Timer, remaining_time : fl
 
 func handle_potion_collision(body : Node, player, potion, potion_name : String) -> void:
 	if (body.get_name() == "Player"):
-		player.inventory["cure potion"] = 100
+		player.inventory[potion_name] += 1
 		potion.queue_free()

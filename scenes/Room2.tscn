@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/tileset/nature.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/Characters/Player.tscn" type="PackedScene" id=2]
@@ -8,6 +8,9 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1396.97, 47.6664 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 513.83, 63.8637 )
 
 [node name="Room 2" type="Node2D"]
 script = ExtResource( 5 )
@@ -46,7 +49,16 @@ position = Vector2( 540.23, 520.431 )
 position = Vector2( 46.7357, 68.0768 )
 shape = SubResource( 1 )
 
+[node name="VerticalCameraTrigger" type="Area2D" parent="."]
+position = Vector2( 586.966, 209.459 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VerticalCameraTrigger"]
+position = Vector2( 0, 57.3981 )
+shape = SubResource( 2 )
+
 [connection signal="body_entered" from="CurePotion" to="." method="_on_CurePotion_body_entered"]
 [connection signal="id_pressed" from="PauseMenu" to="." method="_on_PauseMenu_id_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="body_entered" from="RespawnTrigger" to="." method="_on_RespawnTrigger_body_entered"]
+[connection signal="body_entered" from="VerticalCameraTrigger" to="." method="_on_VerticalCameraTrigger_body_entered"]
+[connection signal="body_exited" from="VerticalCameraTrigger" to="." method="_on_VerticalCameraTrigger_body_exited"]

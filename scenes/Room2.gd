@@ -8,6 +8,7 @@ onready var time_lbl := $TimeLbl
 onready var cure_potion := $CurePotion
 
 var remaining_time := 10.0
+var is_vertical_camera_triggered := false
 
 const spawn_point = Vector2(93, 65)
 
@@ -32,7 +33,19 @@ func _process(delta):
 	camera.position.x = player.position.x
 	pause_menu.set_position(player.position)
 	time_lbl.set_position(Vector2(player.position.x, player.position.y - 50))
-		
+	
+	if is_vertical_camera_triggered:
+		if camera.position.y < player.position.y:
+			camera.position.y += 2
+		elif camera.position.y > player.position.y:
+			camera.position.y -= 2
+	else:
+		if camera.position.y < spawn_point.y:
+			camera.position.y += 1
+		elif camera.position.y > spawn_point.y:
+			camera.position.y -= 1
+
+
 	Game.pause_input_check(pause_menu)
 	Game.check_player_status(player, timer, time_lbl, "res://scenes/GameOverScreen.tscn")
 
@@ -47,10 +60,20 @@ func _on_Timer_timeout():
 
 
 func _on_CurePotion_body_entered(body):
-	Game.handle_potion_collision(body, player, cure_potion, "Cure Potion")
+	Game.handle_potion_collision(body, player, cure_potion, "cure potion")
 
 
 # respawn player if it fell off map
 func _on_RespawnTrigger_body_entered(body):
 	if (body.get_name() == "Player"):
 		Game.respawn(player, spawn_point)
+
+
+func _on_VerticalCameraTrigger_body_entered(body):
+	if (body.get_name() == "Player"):
+		is_vertical_camera_triggered = true
+
+
+func _on_VerticalCameraTrigger_body_exited(body):
+	if (body.get_name() == "Player"):
+		is_vertical_camera_triggered = false

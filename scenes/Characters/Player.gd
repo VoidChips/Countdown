@@ -4,7 +4,7 @@ export var run_speed := 350
 export var jump_speed := -1000
 export var gravity := 2500
 
-onready var inventory := PlayerState.inventory
+onready var inventory := PlayerState.get_items()
 
 var velocity = Vector2()
 var is_poisoned := true
@@ -51,9 +51,9 @@ func get_input() -> void:
 	
 	# drink potion
 	if drink:
-		if inventory["cure potion"] == 100:
+		if inventory["cure potion"] > 0:
+			inventory["cure potion"] -= 1
 			is_poisoned = false
-			inventory.erase("cure potion")
 
 
 func _physics_process(delta):
