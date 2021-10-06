@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/items/potions.png" type="Texture" id=1]
-[ext_resource path="res://scenes/Items/CurePotion.gd" type="Script" id=2]
+[ext_resource path="res://scenes/Items/SpeedDownPotion.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 8.25318
-height = 15.4962
+radius = 8.43973
+height = 14.806
 
-[node name="CurePotion" type="Area2D"]
+[node name="SpeedDownPotion" type="Area2D"]
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -16,4 +16,4 @@ shape = SubResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 8, 2, 16, 30 )
+region_rect = Rect2( 40, 2, 16, 30 )

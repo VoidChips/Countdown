@@ -1,7 +1,7 @@
 extends Node
 
 var _inventory := {
-	"cure potion": 0,
+	"potions" : [],
 }
 
 

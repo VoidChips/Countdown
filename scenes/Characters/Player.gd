@@ -51,8 +51,8 @@ func get_input() -> void:
 	
 	# drink potion
 	if drink:
-		if inventory["cure potion"] > 0:
-			inventory["cure potion"] -= 1
+		if Game.PotionTypes.CURE in inventory["potions"]:
+			inventory["potions"].erase(Game.PotionTypes.CURE)
 			is_poisoned = false
 
 

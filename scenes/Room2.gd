@@ -5,7 +5,6 @@ onready var camera := $Camera2D
 onready var pause_menu := $PauseMenu
 onready var timer := $Timer
 onready var time_lbl := $TimeLbl
-onready var cure_potion := $CurePotion
 
 var remaining_time := 10.0
 var is_vertical_camera_triggered := false
@@ -56,7 +55,7 @@ func _on_Timer_timeout():
 
 
 func _on_CurePotion_body_entered(body):
-	Game.handle_potion_collision(body, player, cure_potion, "cure potion")
+	Game.handle_potion_collision(body, player, get_node("CurePotion"))
 
 
 # respawn player if it fell off map

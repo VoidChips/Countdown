@@ -5,7 +5,6 @@ onready var camera := $Camera2D
 onready var pause_menu := $PauseMenu
 onready var timer := $Timer
 onready var time_lbl := $TimeLbl
-onready var cure_potion := $CurePotion
 
 var remaining_time := 10.0
 
@@ -47,11 +46,11 @@ func _on_Timer_timeout():
 	remaining_time = Game.handle_timeout(player, time_lbl, timer, remaining_time)
 
 
-func _on_CurePotion_body_entered(body):
-	Game.handle_potion_collision(body, player, cure_potion, "cure potion")
-
-
 # respawn player if it fell off map
 func _on_RespawnTrigger_body_entered(body):
 	if (body.get_name() == "Player"):
 		Game.respawn(player, spawn_point)
+
+
+func _on_CurePotion_body_entered(body):
+	Game.handle_potion_collision(body, player, get_node("CurePotion"))

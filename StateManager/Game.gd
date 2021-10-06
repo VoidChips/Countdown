@@ -5,6 +5,14 @@ var _status := {
 	"current_room": "res://scenes/Room1.tscn",
 }
 
+enum PotionTypes {
+	CURE,
+	POISON,
+	SPEED_UP,
+	SPEED_DOWN,
+	JUMP_BOOST,
+}
+
 const SAVE_DIR = "user://saves/"
 const SAVE_PATH = SAVE_DIR + "save.dat"
 
@@ -94,12 +102,7 @@ func game_over(time_lbl : Label) -> void:
 	time_lbl.text = "You didn't make it..."
 	
 	# wait before changing scene
-	var t = Timer.new()
-	t.set_wait_time(1.5)
-	t.set_one_shot(true)
-	self.add_child(t)
-	t.start()
-	yield(t, "timeout")
+	yield(get_tree().create_timer(1.5), "timeout")
 	
 	get_tree().change_scene("res://scenes/GameOverScreen.tscn")
 
@@ -137,7 +140,7 @@ func handle_timeout(player, time_lbl : Label, timer : Timer, remaining_time : fl
 	return remaining_time
 
 
-func handle_potion_collision(body : Node, player, potion, potion_name : String) -> void:
+func handle_potion_collision(body : Node, player, potion) -> void:
 	if (body.get_name() == "Player"):
-		player.inventory[potion_name] += 1
+		player.inventory["potions"].push_back(potion.type)
 		potion.queue_free()
