@@ -62,6 +62,7 @@ func _on_CurePotion_body_entered(body):
 func _on_RespawnTrigger_body_entered(body):
 	if (body.get_name() == "Player"):
 		Game.respawn(player, spawn_point)
+		camera.position.y = spawn_point.y
 
 
 func _on_VerticalCameraTrigger_body_entered(body):
