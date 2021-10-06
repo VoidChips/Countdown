@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/tileset/nature.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/Characters/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Items/CurePotion.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/PauseMenu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/Room2.gd" type="Script" id=5]
+[ext_resource path="res://assets/background/sky.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1396.97, 47.6664 )
@@ -55,6 +56,11 @@ position = Vector2( 586.966, 209.459 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VerticalCameraTrigger"]
 position = Vector2( 0, 57.3981 )
 shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+show_behind_parent = true
+position = Vector2( 586.966, -296.665 )
+texture = ExtResource( 6 )
 
 [connection signal="body_entered" from="CurePotion" to="." method="_on_CurePotion_body_entered"]
 [connection signal="id_pressed" from="PauseMenu" to="." method="_on_PauseMenu_id_pressed"]

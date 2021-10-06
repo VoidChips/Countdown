@@ -92,6 +92,16 @@ func change_room(player, scene : String) -> void:
 # handle game over actions
 func game_over(time_lbl : Label) -> void:
 	time_lbl.text = "You didn't make it..."
+	
+	# wait before changing scene
+	var t = Timer.new()
+	t.set_wait_time(1.5)
+	t.set_one_shot(true)
+	self.add_child(t)
+	t.start()
+	yield(t, "timeout")
+	
+	get_tree().change_scene("res://scenes/GameOverScreen.tscn")
 
 
 # respawn an object to a position

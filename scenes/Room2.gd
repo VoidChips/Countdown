@@ -33,18 +33,14 @@ func _process(delta):
 	camera.position.x = player.position.x
 	pause_menu.set_position(player.position)
 	time_lbl.set_position(Vector2(player.position.x, player.position.y - 50))
-	
+
+	# make camera follow player vertically	or move back to spawn vertical position
 	if is_vertical_camera_triggered:
 		if camera.position.y < player.position.y:
 			camera.position.y += 2
-		elif camera.position.y > player.position.y:
-			camera.position.y -= 2
 	else:
-		if camera.position.y < spawn_point.y:
-			camera.position.y += 1
-		elif camera.position.y > spawn_point.y:
+		if camera.position.y > spawn_point.y:
 			camera.position.y -= 1
-
 
 	Game.pause_input_check(pause_menu)
 	Game.check_player_status(player, timer, time_lbl, "res://scenes/GameOverScreen.tscn")
