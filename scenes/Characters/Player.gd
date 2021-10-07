@@ -10,6 +10,11 @@ var velocity = Vector2()
 var is_poisoned := true
 var is_dead := false
 var is_jumping := false
+var is_drinking := false
+
+
+func _ready():
+	$Potion.visible = false
 
 
 # use input to handle player movement and action
@@ -29,41 +34,43 @@ func get_input() -> void:
 	if is_on_floor() and jump:
 		velocity.y = jump_speed
 		is_jumping = true
-	elif not is_on_floor() and not is_jumping:
-		$AnimationPlayer.play("fall")
 	
 	# move right or left
 	if right:
 		velocity.x += run_speed
 		$Sprite.flip_h = false
 		
-		if is_on_floor():
+		if is_on_floor() and not is_drinking:
 			$AnimationPlayer.play("walk")
 	elif left:
 		velocity.x -= run_speed
 		$Sprite.flip_h = true
 		
-		if is_on_floor():
+		if is_on_floor() and not is_drinking:
 			$AnimationPlayer.play("walk")
-	elif is_on_floor():
+	elif is_on_floor() and not is_drinking:
 		$AnimationPlayer.play("idle")
 	
 	# drink potion
 	if drink:
 		if Game.PotionTypes.CURE in inventory["potions"]:
-			inventory["potions"].erase(Game.PotionTypes.CURE)
-			is_poisoned = false
+			$AnimationPlayer.play("drink")
+			$Potion.frame = 0  # set the type of potion
+			$Potion.visible = true
+			is_drinking = true
 
 
 func _physics_process(delta):
 	velocity.y += gravity * delta
 	
 	# play the jumping animation when jumping until player starts to fall
-	if is_jumping:
+	if is_jumping and not is_drinking:
 		$AnimationPlayer.play("jump")
 		if velocity.y > 0.0:
 			is_jumping = false
 			$AnimationPlayer.play("fall")
+	elif not is_on_floor() and not is_drinking:
+		$AnimationPlayer.play("fall")
 			
 	get_input()
 	velocity = move_and_slide(velocity, Vector2(0, -1))
@@ -74,3 +81,14 @@ func _physics_process(delta):
 #		if collision:
 #			var object = collision.collider
 
+
+# finish drinking when the drinking animation ends
+func finish_drinking() -> void:
+	is_drinking = false
+	inventory["potions"].erase(Game.PotionTypes.CURE)
+	is_poisoned = false
+
+
+# toggle visiblity of potion
+func toggle_potion_visible() -> void:
+	$Potion.visible = not $Potion.visible
