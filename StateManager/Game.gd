@@ -103,7 +103,6 @@ func game_over(time_lbl : Label) -> void:
 	
 	# wait before changing scene
 	yield(get_tree().create_timer(1.5), "timeout")
-	
 	get_tree().change_scene("res://scenes/GameOverScreen.tscn")
 
 

@@ -13,6 +13,7 @@ var is_jumping := false
 var is_drinking := false
 var is_facing_right := true
 
+
 func _ready():
 	$Potion.visible = false
 
@@ -41,16 +42,16 @@ func get_input() -> void:
 		$Sprite.flip_h = false
 		is_facing_right = true
 		
-		if is_on_floor() and not is_drinking:
+		if is_on_floor():
 			$AnimationPlayer.play("walk")
 	elif left:
 		velocity.x -= run_speed
 		$Sprite.flip_h = true
 		is_facing_right = false
 		
-		if is_on_floor() and not is_drinking:
+		if is_on_floor():
 			$AnimationPlayer.play("walk")
-	elif is_on_floor() and not is_drinking:
+	elif is_on_floor():
 		$AnimationPlayer.play("idle")
 	
 	# drink potion

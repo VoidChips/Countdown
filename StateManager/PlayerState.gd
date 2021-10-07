@@ -5,12 +5,12 @@ var _inventory := {
 }
 
 
-# get all items
+# get the copy of the inventory
 func get_items() -> Dictionary:
-	return _inventory
+	return _inventory.duplicate(true)
 
 
-# set all items
+# set inventory
 func set_items(d : Dictionary) -> void:
 	_inventory = d
 
