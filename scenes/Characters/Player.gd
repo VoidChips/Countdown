@@ -29,25 +29,24 @@ func get_input() -> void:
 	if is_on_floor() and jump:
 		velocity.y = jump_speed
 		is_jumping = true
-		$AnimatedSprite.play("jump")
 	elif not is_on_floor() and not is_jumping:
-		$AnimatedSprite.play("fall")
+		$AnimationPlayer.play("fall")
 	
 	# move right or left
 	if right:
 		velocity.x += run_speed
-		$AnimatedSprite.flip_h = false
+		$Sprite.flip_h = false
 		
 		if is_on_floor():
-			$AnimatedSprite.play("walk")
+			$AnimationPlayer.play("walk")
 	elif left:
 		velocity.x -= run_speed
-		$AnimatedSprite.flip_h = true
+		$Sprite.flip_h = true
 		
 		if is_on_floor():
-			$AnimatedSprite.play("walk")
+			$AnimationPlayer.play("walk")
 	elif is_on_floor():
-		$AnimatedSprite.play("idle")
+		$AnimationPlayer.play("idle")
 	
 	# drink potion
 	if drink:
@@ -61,10 +60,10 @@ func _physics_process(delta):
 	
 	# play the jumping animation when jumping until player starts to fall
 	if is_jumping:
-		$AnimatedSprite.play("jump")
+		$AnimationPlayer.play("jump")
 		if velocity.y > 0.0:
 			is_jumping = false
-			$AnimatedSprite.play("fall")
+			$AnimationPlayer.play("fall")
 			
 	get_input()
 	velocity = move_and_slide(velocity, Vector2(0, -1))
