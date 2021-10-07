@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/items/potions_small.png" type="Texture" id=1]
 [ext_resource path="res://assets/characters/main character.png" type="Texture" id=4]
@@ -8,8 +8,68 @@
 radius = 14.5068
 height = 0.0
 
+[sub_resource type="Animation" id=25]
+resource_name = "drink left"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 24, 25, 26, 27, 28, 29 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Potion:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -18, 0 ), Vector2( -17, 0 ), Vector2( -13, 0 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "toggle_potion_visible"
+}, {
+"args": [  ],
+"method": "toggle_potion_visible"
+}, {
+"args": [  ],
+"method": "finish_drinking"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:flip_h")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
 [sub_resource type="Animation" id=24]
-resource_name = "drink"
+resource_name = "drink right"
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -42,9 +102,12 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0.1, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "toggle_potion_visible"
+}, {
 "args": [  ],
 "method": "toggle_potion_visible"
 }, {
@@ -133,17 +196,18 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 4 )
+flip_h = true
 hframes = 8
 vframes = 4
-frame = 27
+frame = 24
 
 [node name="Potion" type="Sprite" parent="."]
-position = Vector2( 13, 0 )
 texture = ExtResource( 1 )
 hframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/drink = SubResource( 24 )
+"anims/drink left" = SubResource( 25 )
+"anims/drink right" = SubResource( 24 )
 anims/fall = SubResource( 23 )
 anims/idle = SubResource( 20 )
 anims/jump = SubResource( 22 )

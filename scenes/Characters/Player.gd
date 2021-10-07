@@ -11,7 +11,7 @@ var is_poisoned := true
 var is_dead := false
 var is_jumping := false
 var is_drinking := false
-
+var is_facing_right := true
 
 func _ready():
 	$Potion.visible = false
@@ -39,12 +39,14 @@ func get_input() -> void:
 	if right:
 		velocity.x += run_speed
 		$Sprite.flip_h = false
+		is_facing_right = true
 		
 		if is_on_floor() and not is_drinking:
 			$AnimationPlayer.play("walk")
 	elif left:
 		velocity.x -= run_speed
 		$Sprite.flip_h = true
+		is_facing_right = false
 		
 		if is_on_floor() and not is_drinking:
 			$AnimationPlayer.play("walk")
@@ -54,9 +56,11 @@ func get_input() -> void:
 	# drink potion
 	if drink:
 		if Game.PotionTypes.CURE in inventory["potions"]:
-			$AnimationPlayer.play("drink")
+			if is_facing_right:
+				$AnimationPlayer.play("drink right")
+			else:
+				$AnimationPlayer.play("drink left")
 			$Potion.frame = 0  # set the type of potion
-			$Potion.visible = true
 			is_drinking = true
 
 
@@ -71,8 +75,10 @@ func _physics_process(delta):
 			$AnimationPlayer.play("fall")
 	elif not is_on_floor() and not is_drinking:
 		$AnimationPlayer.play("fall")
-			
-	get_input()
+	
+	if not is_drinking:
+		get_input()
+
 	velocity = move_and_slide(velocity, Vector2(0, -1))
 	
 	# detect collision
