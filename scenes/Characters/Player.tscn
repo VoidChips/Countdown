@@ -198,7 +198,7 @@ shape = SubResource( 1 )
 texture = ExtResource( 4 )
 hframes = 8
 vframes = 4
-frame = 24
+frame = 18
 
 [node name="Potion" type="Sprite" parent="."]
 position = Vector2( 17, 0 )

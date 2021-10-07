@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/potions.png-26839c44937087d87a8e64e254d323bc.stex"
+path="res://.import/potions_large.png-5f5b08825004c2451743afddde968afc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/items/potions.png"
-dest_files=[ "res://.import/potions.png-26839c44937087d87a8e64e254d323bc.stex" ]
+source_file="res://assets/items/potions_large.png"
+dest_files=[ "res://.import/potions_large.png-5f5b08825004c2451743afddde968afc.stex" ]
 
 [params]
 
