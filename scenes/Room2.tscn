@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/tileset/nature.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/Characters/Player.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/Room2.gd" type="Script" id=5]
 [ext_resource path="res://assets/background/sky.png" type="Texture" id=6]
 [ext_resource path="res://assets/fonts/Noto_Sans_JP/NotoSansJP-Bold.otf" type="DynamicFontData" id=7]
+[ext_resource path="res://assets/music/bensound-straight.mp3" type="AudioStream" id=8]
 
 [sub_resource type="DynamicFont" id=3]
 outline_size = 1
@@ -73,6 +74,9 @@ texture = ExtResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
 
 [connection signal="body_entered" from="CurePotion" to="." method="_on_CurePotion_body_entered"]
 [connection signal="id_pressed" from="PauseMenu" to="." method="_on_PauseMenu_id_pressed"]

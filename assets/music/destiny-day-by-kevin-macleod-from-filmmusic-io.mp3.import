@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/destiny-day-by-kevin-macleod-from-filmmusic-io.mp3-e47e9005bec9af84416992daff2d74d0.mp3str"
+
+[deps]
+
+source_file="res://assets/music/destiny-day-by-kevin-macleod-from-filmmusic-io.mp3"
+dest_files=[ "res://.import/destiny-day-by-kevin-macleod-from-filmmusic-io.mp3-e47e9005bec9af84416992daff2d74d0.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

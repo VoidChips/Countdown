@@ -6,6 +6,7 @@ onready var pause_menu := $PauseMenu
 onready var main_timer := $MainTimer
 onready var read_timer := $ReadTimer
 onready var time_lbl := $TimeLbl
+onready var music_player := $MusicPlayer
 
 var remaining_time := 10.0
 var reading_time := 2
@@ -22,13 +23,14 @@ func _ready():
 		"pause_menu": pause_menu,
 		"spawn_point": spawn_point,
 		"main_timer": main_timer,
-		"read_timer": read_timer,
 		"time_lbl": time_lbl,
 		"remaining_time": remaining_time,
 		"reading_time": reading_time,
+		"music_player": music_player,
+		"curr_scene": "room2",
 	}
 	
-	Game.set_status("current_room", "res://scenes/Room2.tscn")
+	Game.set_status("curr_scene_path", "res://scenes/Room2.tscn")
 	Game.setup_room(room_info)
 	
 	

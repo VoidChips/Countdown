@@ -6,7 +6,7 @@ onready var pause_menu := $PauseMenu
 onready var main_timer := $MainTimer
 onready var read_timer := $ReadTimer
 onready var time_lbl := $TimeLbl
-
+onready var music_player := $MusicPlayer
 var remaining_time := 10.0
 var reading_time := 1
 var room_info := {}
@@ -23,10 +23,12 @@ func _ready():
 		"main_timer": main_timer,
 		"time_lbl": time_lbl,
 		"remaining_time": remaining_time,
+		"music_player": music_player,
+		"curr_scene": "room1",
 	}
 
 	Game.set_status("is_new_game", false)
-	Game.set_status("current_room", "res://scenes/Room1.tscn")
+	Game.set_status("curr_scene_path", "res://scenes/Room1.tscn")
 	Game.setup_room(room_info)
 
 	
@@ -51,7 +53,6 @@ func _on_MainTimer_timeout():
 
 func _on_ReadTimer_timeout():
 	reading_time -= 1.0
-	print(reading_time)
 
 
 # respawn player if it fell off map

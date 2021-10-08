@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/Noto_Sans_JP/NotoSansJP-Regular.otf" type="DynamicFontData" id=2]
 [ext_resource path="res://assets/background/main menu.png" type="Texture" id=3]
+[ext_resource path="res://assets/music/destiny-day-by-kevin-macleod-from-filmmusic-io.mp3" type="AudioStream" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -45,7 +46,8 @@ margin_top = 59.0
 margin_right = 145.0
 margin_bottom = 99.0
 rect_pivot_offset = Vector2( -235.407, -35.9795 )
-focus_neighbour_top = NodePath("../QuitBtn")
+focus_neighbour_top = NodePath("../NewGameBtn")
+focus_neighbour_bottom = NodePath("../OptionsBtn")
 size_flags_vertical = 3
 keep_pressed_outside = true
 text = "Continue"
@@ -57,6 +59,8 @@ __meta__ = {
 margin_top = 119.0
 margin_right = 145.0
 margin_bottom = 159.0
+focus_neighbour_top = NodePath("../ContinueBtn")
+focus_neighbour_bottom = NodePath("../QuitBtn")
 size_flags_vertical = 3
 text = "Options"
 
@@ -64,7 +68,7 @@ text = "Options"
 margin_top = 179.0
 margin_right = 145.0
 margin_bottom = 219.0
-focus_neighbour_bottom = NodePath("../StartBtn")
+focus_neighbour_bottom = NodePath("../NewGameBtn")
 size_flags_vertical = 3
 text = "Quit"
 
@@ -84,6 +88,9 @@ __meta__ = {
 show_behind_parent = true
 position = Vector2( 320.494, 181.117 )
 texture = ExtResource( 3 )
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
 
 [connection signal="pressed" from="Buttons/NewGameBtn" to="." method="_on_StartBtn_pressed"]
 [connection signal="pressed" from="Buttons/NewGameBtn" to="." method="_on_NewGameBtn_pressed"]

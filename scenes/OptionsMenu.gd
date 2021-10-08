@@ -10,6 +10,8 @@ onready var is_fullscreen = settings["screen"]["is_fullscreen"]
 
 
 func _ready():
+	Game.set_status("curr_scene", "options_menu")
+	Game.play_music($MusicPlayer)
 	options.alignment = BoxContainer.ALIGN_CENTER
 	
 	resolution_btn.add_item("640x360")
@@ -140,4 +142,6 @@ func _on_ConfirmBtn_pressed():
 
 # return to main menu
 func _on_BackBtn_pressed():
+	Game.set_status("prev_scene", "options_menu")
+	Game.set_status("music_pos", $MusicPlayer.get_playback_position())
 	get_tree().change_scene("res://scenes/MainMenu.tscn")

@@ -2,10 +2,15 @@ extends Node
 
 var _status := {
 	"is_new_game": true,
-	"current_room": "res://scenes/Room1.tscn",
+	"curr_scene": "main_menu",
+	"curr_scene_path": "res://scenes/Room1.tscn",
+	"prev_scene": null,
+	"room_completed": false,
+	"room_failed": false,
+	"music_pos": 0.0,
 }
 
-var room_completed := false
+var music_player : AudioStreamPlayer
 
 enum PotionTypes {
 	CURE,
@@ -17,6 +22,14 @@ enum PotionTypes {
 
 const SAVE_DIR = "user://saves/"
 const SAVE_PATH = SAVE_DIR + "save.dat"
+
+const MUSIC_FILES := {
+	"main_menu": "res://assets/music/destiny-day-by-kevin-macleod-from-filmmusic-io.mp3",
+	"options_menu": "res://assets/music/destiny-day-by-kevin-macleod-from-filmmusic-io.mp3",
+	"room1": "res://assets/music/bensound-straight.mp3",
+	"room2": "res://assets/music/bensound-straight.mp3",
+	"game_over_screen": "res://assets/music/bensound-straight.mp3",
+}
 
 
 func _ready():
@@ -62,6 +75,34 @@ func save_game() -> void:
 	file.close()
 
 
+# reset _status
+# resetAll flag resets everything
+func reset(resetAll : bool) -> void:
+	if resetAll:
+		_status["is_new_game"] = true
+		_status["curr_scene_path"] = "res://scenes/Room1.tscn"
+	
+	_status["prev_scene"] = null
+	_status["room_completed"] = false
+	_status["room_failed"] = false
+	_status["music_pos"] = 0.0
+
+
+# Play music using a's stream.
+# Music from previous scene will be played if there is no stream in a
+# or default to one if there is no previous scene
+func play_music(a : AudioStreamPlayer) -> void:
+	if a.get_stream() == null:
+		if _status["prev_scene"] != null:
+			a.set_stream(load(MUSIC_FILES[_status["prev_scene"]]))
+		else:
+			a.set_stream(load("res://assets/music/bensound-straight.mp3"))
+
+	music_player = a
+	music_player.play()
+	music_player.seek(_status["music_pos"])
+
+
 # setup scene at the beginning
 func setup_room(room_info : Dictionary) -> void:
 	var player = room_info["player"]
@@ -71,9 +112,14 @@ func setup_room(room_info : Dictionary) -> void:
 	var time_lbl = room_info["time_lbl"]
 	var main_timer = room_info["main_timer"]
 	var remaining_time = room_info["remaining_time"]
+	var curr_music_player = room_info["music_player"]
 	
+	play_music(curr_music_player)
 	save_game()
-	room_completed = false
+	
+	_status["curr_scene"] = room_info["curr_scene"]
+	_status["room_completed"] = false
+	_status["room_failed"] = false
 	
 	player.position = spawn_point
 	camera.position = spawn_point
@@ -84,26 +130,38 @@ func setup_room(room_info : Dictionary) -> void:
 	
 
 # check if the player was cured or died
-func check_player_status(player, main_timer : Timer, read_timer : Timer, time_lbl : Label, remaining_time : int, reading_time : int, scene : String) -> void:	
-	if room_completed:
+func check_player_status(player, 
+						main_timer : Timer, 
+						read_timer : Timer, 
+						time_lbl : Label, 
+						remaining_time : int, 
+						reading_time : int, 
+						scene : String) -> void:	
+	if _status["room_completed"]:
 		if reading_time <= 0:
 			change_room(player, scene)
+	elif _status["room_failed"]:
+		if reading_time <= 0:
+			game_over(time_lbl)
 	elif not player.is_poisoned:
 		var money := round(remaining_time)
 		
-		room_completed = true
+		_status["room_completed"] = true
 		main_timer.stop()
 		player.can_move = false
 		time_lbl.text = "You got %s coins" % money
 		PlayerState.add_money(money)
 		read_timer.start()
-	if player.is_dead:
-		game_over(time_lbl)
+	elif player.is_dead:
+		_status["room_failed"] = true
+		read_timer.start()
 
 
 # change scene after saving player's inventory
 func change_room(player, scene : String) -> void:
 	PlayerState.set_items(player.inventory)
+	_status["prev_scene"] = _status["curr_scene"]
+	_status["music_pos"] = music_player.get_playback_position()
 	get_tree().change_scene(scene)
 	
 
@@ -111,8 +169,8 @@ func change_room(player, scene : String) -> void:
 func game_over(time_lbl : Label) -> void:
 	time_lbl.text = "You didn't make it..."
 	
-	# wait before changing scene
-	yield(get_tree().create_timer(1.5), "timeout")
+	_status["prev_scene"] = _status["curr_scene"]
+	_status["music_pos"] = music_player.get_playback_position()
 	get_tree().change_scene("res://scenes/GameOverScreen.tscn")
 
 

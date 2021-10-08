@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/bensound-straight.mp3-34103f010c35f0137d240792a23b631c.mp3str"
+
+[deps]
+
+source_file="res://assets/music/bensound-straight.mp3"
+dest_files=[ "res://.import/bensound-straight.mp3-34103f010c35f0137d240792a23b631c.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
