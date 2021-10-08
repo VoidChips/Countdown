@@ -1,2 +1,16 @@
+[Music]
+
+Straight - Bensound
+
+Destiny Day by Kevin MacLeod
+Link: https://incompetech.filmmusic.io/song/4984-destiny-day
+License: https://filmmusic.io/standard-license
+
+[Tileset]
+
 nature platformer tileset 16x16 - rotting pixels
+
+[Font]
+
 noto sans jp - google
+
