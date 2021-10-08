@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/tileset/nature.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/Characters/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/Items/CurePotion.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Items/Potion.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/PauseMenu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/Room2.gd" type="Script" id=5]
 [ext_resource path="res://assets/background/sky.png" type="Texture" id=6]

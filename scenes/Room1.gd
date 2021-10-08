@@ -25,7 +25,7 @@ func _ready():
 	Game.set_status("is_new_game", false)
 	Game.set_status("current_room", "res://scenes/Room1.tscn")
 	Game.setup_room(nodes)
-	
+
 	
 func _process(delta):
 	# make camera follow player horizontally

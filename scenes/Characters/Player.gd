@@ -61,7 +61,7 @@ func get_input() -> void:
 				$AnimationPlayer.play("drink right")
 			else:
 				$AnimationPlayer.play("drink left")
-			$Potion.frame = 0  # set the type of potion
+			$Potion.frame = 0  # set the type of potion's sprite
 			is_drinking = true
 
 

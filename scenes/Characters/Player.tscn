@@ -8,7 +8,7 @@
 radius = 14.5068
 height = 0.0
 
-[sub_resource type="Animation" id=25]
+[sub_resource type="Animation" id=2]
 resource_name = "drink left"
 length = 0.6
 tracks/0/type = "value"
@@ -56,7 +56,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=24]
+[sub_resource type="Animation" id=3]
 resource_name = "drink right"
 length = 0.6
 tracks/0/type = "value"
@@ -104,7 +104,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=23]
+[sub_resource type="Animation" id=4]
 resource_name = "fall"
 length = 0.4
 loop = true
@@ -121,7 +121,7 @@ tracks/0/keys = {
 "values": [ 18, 19 ]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=5]
 resource_name = "idle"
 length = 0.8
 loop = true
@@ -138,7 +138,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 1 ]
 }
 
-[sub_resource type="Animation" id=22]
+[sub_resource type="Animation" id=6]
 resource_name = "jump"
 length = 0.6
 loop = true
@@ -156,7 +156,7 @@ tracks/0/keys = {
 "values": [ 16, 17, 18, 19 ]
 }
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=7]
 resource_name = "walk"
 length = 0.7
 loop = true
@@ -206,9 +206,9 @@ texture = ExtResource( 1 )
 hframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-"anims/drink left" = SubResource( 25 )
-"anims/drink right" = SubResource( 24 )
-anims/fall = SubResource( 23 )
-anims/idle = SubResource( 20 )
-anims/jump = SubResource( 22 )
-anims/walk = SubResource( 21 )
+"anims/drink left" = SubResource( 2 )
+"anims/drink right" = SubResource( 3 )
+anims/fall = SubResource( 4 )
+anims/idle = SubResource( 5 )
+anims/jump = SubResource( 6 )
+anims/walk = SubResource( 7 )
