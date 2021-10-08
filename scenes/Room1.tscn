@@ -46,7 +46,9 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Timer" type="Timer" parent="."]
+[node name="MainTimer" type="Timer" parent="."]
+
+[node name="ReadTimer" type="Timer" parent="."]
 
 [node name="TimeLbl" type="Label" parent="."]
 margin_right = 40.0
@@ -69,6 +71,7 @@ position = Vector2( -38.4676, 28.743 )
 shape = SubResource( 2 )
 
 [connection signal="id_pressed" from="PauseMenu" to="." method="_on_PauseMenu_id_pressed"]
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="MainTimer" to="." method="_on_MainTimer_timeout"]
+[connection signal="timeout" from="ReadTimer" to="." method="_on_ReadTimer_timeout"]
 [connection signal="body_entered" from="CurePotion" to="." method="_on_CurePotion_body_entered"]
 [connection signal="body_entered" from="RespawnTrigger" to="." method="_on_RespawnTrigger_body_entered"]

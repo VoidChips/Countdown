@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/tileset/nature.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/Characters/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,12 @@
 [ext_resource path="res://scenes/PauseMenu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/Room2.gd" type="Script" id=5]
 [ext_resource path="res://assets/background/sky.png" type="Texture" id=6]
+[ext_resource path="res://assets/fonts/Noto_Sans_JP/NotoSansJP-Bold.otf" type="DynamicFontData" id=7]
+
+[sub_resource type="DynamicFont" id=3]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 7 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1396.97, 47.6664 )
@@ -34,11 +40,14 @@ current = true
 [node name="PauseMenu" parent="." instance=ExtResource( 4 )]
 items = [ "Resume", null, 0, false, false, 0, 0, null, "", false, "Main Menu", null, 0, false, false, 1, 0, null, "", false ]
 
-[node name="Timer" type="Timer" parent="."]
+[node name="MainTimer" type="Timer" parent="."]
+
+[node name="ReadTimer" type="Timer" parent="."]
 
 [node name="TimeLbl" type="Label" parent="."]
 margin_right = 40.0
 margin_bottom = 14.0
+custom_fonts/font = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -67,7 +76,8 @@ __meta__ = {
 
 [connection signal="body_entered" from="CurePotion" to="." method="_on_CurePotion_body_entered"]
 [connection signal="id_pressed" from="PauseMenu" to="." method="_on_PauseMenu_id_pressed"]
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="MainTimer" to="." method="_on_MainTimer_timeout"]
+[connection signal="timeout" from="ReadTimer" to="." method="_on_ReadTimer_timeout"]
 [connection signal="body_entered" from="RespawnTrigger" to="." method="_on_RespawnTrigger_body_entered"]
 [connection signal="body_entered" from="VerticalCameraTrigger" to="." method="_on_VerticalCameraTrigger_body_entered"]
 [connection signal="body_exited" from="VerticalCameraTrigger" to="." method="_on_VerticalCameraTrigger_body_exited"]

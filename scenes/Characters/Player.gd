@@ -12,6 +12,7 @@ var is_dead := false
 var is_jumping := false
 var is_drinking := false
 var is_facing_right := true
+var can_move := true
 
 
 func _ready():
@@ -20,14 +21,18 @@ func _ready():
 
 # use input to handle player movement and action
 func get_input() -> void:
-	velocity.x = 0
 	var right := Input.is_action_pressed('ui_right')
 	var left := Input.is_action_pressed('ui_left')
 	var jump := Input.is_action_just_pressed("jump")
 	var drink := Input.is_action_just_pressed("drink")
+	
+	velocity.x = 0
 
-	# don't process input if the player is dead
+	# don't process input if the player is dead or can't move
 	if is_dead:
+		return
+	elif not can_move:
+		$AnimationPlayer.play("idle")
 		return
 
 	# jump if the player pressed the jump button from the ground
@@ -53,7 +58,7 @@ func get_input() -> void:
 			$AnimationPlayer.play("walk")
 	elif is_on_floor():
 		$AnimationPlayer.play("idle")
-	
+		
 	# drink potion
 	if drink:
 		if Game.PotionTypes.CURE in inventory["potions"]:

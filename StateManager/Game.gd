@@ -5,6 +5,8 @@ var _status := {
 	"current_room": "res://scenes/Room1.tscn",
 }
 
+var room_completed := false
+
 enum PotionTypes {
 	CURE,
 	POISON,
@@ -61,32 +63,40 @@ func save_game() -> void:
 
 
 # setup scene at the beginning
-func setup_room(nodes : Dictionary) -> void:
-	var player = nodes["player"]
-	var camera = nodes["camera"]
-	var pause_menu = nodes["pause_menu"]
-	var spawn_point = nodes["spawn_point"]
-	var time_lbl = nodes["time_lbl"]
-	var timer = nodes["timer"]
-	var remaining_time = nodes["remaining_time"]
+func setup_room(room_info : Dictionary) -> void:
+	var player = room_info["player"]
+	var camera = room_info["camera"]
+	var pause_menu = room_info["pause_menu"]
+	var spawn_point = room_info["spawn_point"]
+	var time_lbl = room_info["time_lbl"]
+	var main_timer = room_info["main_timer"]
+	var remaining_time = room_info["remaining_time"]
 	
 	save_game()
+	room_completed = false
 	
 	player.position = spawn_point
 	camera.position = spawn_point
 	pause_menu.set_position(spawn_point)
 	time_lbl.set_position(Vector2(player.position.x, player.position.y - 50))
 	time_lbl.text = str(remaining_time)
-	timer.start()
+	main_timer.start()
 	
 
-# check the status of the player and act accordingly
-func check_player_status(player, timer : Timer, time_lbl : Label, scene : String) -> void:
-	if not player.is_poisoned:
-		timer.stop()
-		time_lbl.text = ""
-		change_room(player, scene)
+# check if the player was cured or died
+func check_player_status(player, main_timer : Timer, read_timer : Timer, time_lbl : Label, remaining_time : int, reading_time : int, scene : String) -> void:	
+	if room_completed:
+		if reading_time <= 0:
+			change_room(player, scene)
+	elif not player.is_poisoned:
+		var money := round(remaining_time)
 		
+		room_completed = true
+		main_timer.stop()
+		player.can_move = false
+		time_lbl.text = "You got %s coins" % money
+		PlayerState.add_money(money)
+		read_timer.start()
 	if player.is_dead:
 		game_over(time_lbl)
 
