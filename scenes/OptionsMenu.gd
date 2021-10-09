@@ -2,6 +2,7 @@ extends Control
 
 onready var resolution_btn := $Options/ResolutionOption/ResolutionBtn
 onready var fullscreen_checkbox := $Options/FullscreenOption/FullscreenCheckBox
+onready var upscale_checkbox := $Options/UpscaleOption/UpscaleCheckBox
 onready var confirm_btn := $Options/ConfirmBtn
 onready var options := $Options
 onready var settings := Config.get_settings()
@@ -24,8 +25,12 @@ func _ready():
 	if is_fullscreen:
 		disable_all_resolutions()
 		resolution_btn.text = ""
+		fullscreen_checkbox.pressed = true
 	else:
 		disable_invalid_resolutions()
+		fullscreen_checkbox.pressed = false
+		
+	upscale_checkbox.pressed = is_upscale
 		
 	select_current_resolution()
 	confirm_btn.disabled = true
@@ -117,7 +122,7 @@ func _on_ResolutionBtn_item_selected(index):
 
 # toggle fullscreen
 func _on_FullscreenCheckBox_toggled(button_pressed):
-	is_fullscreen = not is_fullscreen
+	is_fullscreen = button_pressed
 	confirm_btn.disabled = false
 	
 	if is_fullscreen:
@@ -130,8 +135,7 @@ func _on_FullscreenCheckBox_toggled(button_pressed):
 # If checked, will render the game at the windowed resolution or max resolution at fullscreen.
 # By default, the game will always render at the base resolution even with different window sizes.
 func _on_UpscaleCheckBox_toggled(button_pressed):
-	if button_pressed:
-		is_upscale = not is_upscale
+	is_upscale = button_pressed
 	confirm_btn.disabled = false
 
 
