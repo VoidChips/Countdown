@@ -3,6 +3,7 @@ extends Control
 onready var resolution_btn := $Options/ResolutionOption/ResolutionBtn
 onready var fullscreen_checkbox := $Options/FullscreenOption/FullscreenCheckBox
 onready var upscale_checkbox := $Options/UpscaleOption/UpscaleCheckBox
+onready var upscale_lbl := $Options/UpscaleOption/UpscaleLbl
 onready var confirm_btn := $Options/ConfirmBtn
 onready var options := $Options
 onready var settings := Config.get_settings()
@@ -105,9 +106,12 @@ func select_current_resolution():
 
 # change the resolution
 func _on_ResolutionBtn_item_selected(index):
+	var is_base_res := false
+	
 	match index:
 		0:
 			resolution = Vector2(640, 360)
+			is_base_res = true
 		1:
 			resolution = Vector2(1280, 720)
 		2:
@@ -117,6 +121,12 @@ func _on_ResolutionBtn_item_selected(index):
 		4:
 			resolution = Vector2(3840, 2160)
 	
+	if is_base_res:
+		upscale_lbl.set("custom_colors/font_color", Color("A0A0A0"))
+	else:
+		upscale_lbl.set("custom_colors/font_color", Color("ffffff"))
+	
+	upscale_checkbox.set_disabled(is_base_res)
 	confirm_btn.disabled = false
 
 
