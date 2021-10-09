@@ -128,12 +128,14 @@ func setup_room(room_info : Dictionary) -> void:
 	var curr_music_player = room_info["music_player"]
 	
 	play_music(curr_music_player)
-	save_game()
 	
 	_status["curr_scene"] = room_info["curr_scene"]
 	_status["curr_room"] = _status["curr_scene"]
 	_status["room_completed"] = false
 	_status["room_failed"] = false
+	
+	# save game after updating the current room
+	save_game()
 	
 	player.position = spawn_point
 	camera.position = spawn_point
