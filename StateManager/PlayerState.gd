@@ -8,6 +8,14 @@ var _state := {
 }
 
 
+func get_state() -> Dictionary:
+	return _state.duplicate(true)
+	
+	
+func set_state(d : Dictionary) -> void:
+	_state = d
+
+
 func get_money() -> int:
 	return _state["money"]
 
@@ -29,4 +37,10 @@ func get_items() -> Dictionary:
 # set inventory
 func set_items(d : Dictionary) -> void:
 	_state["inventory"] = d
+
+
+# reset player state
+func reset() -> void:
+	_state["money"] = 0
+	_state["inventory"]["potions"] = []
 

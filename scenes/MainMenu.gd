@@ -30,6 +30,7 @@ func _ready():
 func _on_NewGameBtn_pressed():
 	Game.reset(true)
 	Game.set_status("prev_scene", "main_menu")
+	PlayerState.reset()
 	get_tree().change_scene("res://scenes/Room1.tscn")
 
 

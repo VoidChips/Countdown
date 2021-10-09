@@ -63,6 +63,7 @@ func load_game() -> void:
 			print("Unable to open config.cfg. Error code: %s" % error)
 			return
 		_status = file.get_var()
+		PlayerState.set_state(file.get_var())
 	
 	file.close()
 
@@ -80,6 +81,7 @@ func save_game() -> void:
 		print("Unable to open config.cfg. Error code: %s" % error)
 		return
 	file.store_var(_status)
+	file.store_var(PlayerState.get_state())
 	file.close()
 
 
@@ -170,6 +172,7 @@ func check_player_status(player,
 		read_timer.start()
 	elif player.is_dead:
 		_status["room_failed"] = true
+		time_lbl.text = "You didn't make it..."
 		read_timer.start()
 
 
@@ -183,8 +186,6 @@ func change_room(player, room : String) -> void:
 
 # handle game over actions
 func game_over(time_lbl : Label) -> void:
-	time_lbl.text = "You didn't make it..."
-	
 	_status["prev_scene"] = _status["curr_scene"]
 	_status["music_pos"] = music_player.get_playback_position()
 	get_tree().change_scene(SCENE_PATHS["game_over_screen"])
