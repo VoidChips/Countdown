@@ -6,6 +6,7 @@ var _settings := {
 	"screen": {
 		"window_size" : Vector2(1280, 720),
 		"is_fullscreen" : false,
+		"is_upscale" : false,
 	},
 }
 

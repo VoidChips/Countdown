@@ -1,13 +1,13 @@
 extends Node
 
 var _status := {
-	"is_new_game": true,
-	"curr_scene": "main_menu",
-	"prev_scene": null,
+	"is_new_game" : true,
+	"curr_scene" : "main_menu",
+	"prev_scene" : null,
 	"curr_room" : "room1",
-	"room_completed": false,
-	"room_failed": false,
-	"music_pos": 0.0,
+	"room_completed" : false,
+	"room_failed" : false,
+	"music_pos" : 0.0,
 }
 
 var music_player : AudioStreamPlayer

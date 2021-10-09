@@ -7,6 +7,7 @@ onready var options := $Options
 onready var settings := Config.get_settings()
 onready var resolution = settings["screen"]["window_size"]
 onready var is_fullscreen = settings["screen"]["is_fullscreen"]
+onready var is_upscale = settings["screen"]["is_upscale"]
 
 
 func _ready():
@@ -28,14 +29,16 @@ func _ready():
 		
 	select_current_resolution()
 	confirm_btn.disabled = true
-	
-	print("resolution: " + str(resolution))
-	print("fullscreen: " + str(is_fullscreen))
+
+	print("resolution: %s" % str(resolution))
+	print("rendered resolution: %s" % str(get_parent().get_size()))
+	print("fullscreen: %s" % str(is_fullscreen))
+	print("upscale: %s" % str(is_upscale))
 
 
 # get the resolution from text
-func get_resolution(var s : String) -> Array:
-	var res : Array
+func get_resolution(var s : String) -> Vector2:
+	var res : Vector2
 	var delimiter_pos : int
 	var left : int
 	var right : int
@@ -44,10 +47,8 @@ func get_resolution(var s : String) -> Array:
 	left = int(s.left(delimiter_pos))
 	right = int(s.right(delimiter_pos))
 	
-	res.append(left)
-	res.append(right)
-		
-	print(str(res[0]) + " " + str(res[1]))
+	res.x = left
+	res.y = right
 	
 	return res
 	
@@ -72,7 +73,7 @@ func enable_valid_resolutions():
 		var res_text = resolution_btn.get_item_text(i)
 		var res := get_resolution(res_text)
 		
-		if screen_size[0] >= res[0] and screen_size[1] >= res[1]:
+		if screen_size.x >= res.x and screen_size.y >= res.y:
 			resolution_btn.set_item_disabled(i, false)
 
 
@@ -112,19 +113,26 @@ func _on_ResolutionBtn_item_selected(index):
 			resolution = Vector2(3840, 2160)
 	
 	confirm_btn.disabled = false
-	print("resolution: " + str(resolution))
 
 
 # toggle fullscreen
 func _on_FullscreenCheckBox_toggled(button_pressed):
-	is_fullscreen = !is_fullscreen
+	is_fullscreen = not is_fullscreen
 	confirm_btn.disabled = false
-	print("fullscreen: " + str(is_fullscreen))
 	
 	if is_fullscreen:
 		disable_all_resolutions()
 	else:
 		enable_valid_resolutions()
+
+
+# toggle upscale
+# If checked, will render the game at the windowed resolution or max resolution at fullscreen.
+# By default, the game will always render at the base resolution even with different window sizes.
+func _on_UpscaleCheckBox_toggled(button_pressed):
+	if button_pressed:
+		is_upscale = not is_upscale
+	confirm_btn.disabled = false
 
 
 # apply changes
@@ -133,11 +141,23 @@ func _on_ConfirmBtn_pressed():
 	OS.window_fullscreen = is_fullscreen
 	OS.window_size = resolution
 	
+	if is_upscale:
+		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_KEEP, Vector2(640, 360))
+	else:
+		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_VIEWPORT, SceneTree.STRETCH_ASPECT_KEEP, Vector2(640, 360))
+	
+	
 	Config.set_setting("screen", "window_size", resolution)
 	Config.set_setting("screen", "is_fullscreen", is_fullscreen)
+	Config.set_setting("screen", "is_upscale", is_upscale)
 	Config.save_settings()
 	
 	confirm_btn.disabled = true
+
+	print("resolution: %s" % str(resolution))
+	print("rendered resolution: %s" % str(get_parent().get_size()))
+	print("fullscreen: %s" % str(is_fullscreen))
+	print("upscale: %s" % str(is_upscale))
 
 
 # return to main menu
@@ -145,3 +165,4 @@ func _on_BackBtn_pressed():
 	Game.set_status("prev_scene", "options_menu")
 	Game.set_status("music_pos", $MusicPlayer.get_playback_position())
 	get_tree().change_scene("res://scenes/MainMenu.tscn")
+
