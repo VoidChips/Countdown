@@ -30,7 +30,6 @@ func _ready():
 		"curr_scene": "room2",
 	}
 	
-	Game.set_status("curr_scene_path", "res://scenes/Room2.tscn")
 	Game.setup_room(room_info)
 	
 	
@@ -49,7 +48,7 @@ func _process(delta):
 			camera.position.y -= 1
 
 	Game.pause_input_check(pause_menu)
-	Game.check_player_status(player, main_timer, read_timer, time_lbl, remaining_time, reading_time, "res://scenes/GameOverScreen.tscn")
+	Game.check_player_status(player, main_timer, read_timer, time_lbl, remaining_time, reading_time, "game_over_screen")
 
 
 # define pause menu actions

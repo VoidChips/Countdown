@@ -3,8 +3,8 @@ extends Node
 var _status := {
 	"is_new_game": true,
 	"curr_scene": "main_menu",
-	"curr_scene_path": "res://scenes/Room1.tscn",
 	"prev_scene": null,
+	"curr_room" : "room1",
 	"room_completed": false,
 	"room_failed": false,
 	"music_pos": 0.0,
@@ -23,6 +23,14 @@ enum PotionTypes {
 const SAVE_DIR = "user://saves/"
 const SAVE_PATH = SAVE_DIR + "save.dat"
 
+const SCENE_PATHS := {
+	"main_menu": "res://scenes/MainMenu.tscn",
+	"options_menu": "res://scenes/OptionsMenu.tscn",
+	"room1": "res://scenes/Room1.tscn",
+	"room2": "res://scenes/Room2.tscn",
+	"game_over_screen": "res://scenes/GameOverScreen.tscn",
+}
+
 const MUSIC_FILES := {
 	"main_menu": "res://assets/music/destiny-day-by-kevin-macleod-from-filmmusic-io.mp3",
 	"options_menu": "res://assets/music/destiny-day-by-kevin-macleod-from-filmmusic-io.mp3",
@@ -38,7 +46,7 @@ func _ready():
 
 # return all status information
 func get_status() -> Dictionary:
-	return _status
+	return _status.duplicate(true)
 	
 
 # set a status
@@ -88,6 +96,11 @@ func reset(resetAll : bool) -> void:
 	_status["music_pos"] = 0.0
 
 
+# get the path of current room
+func getCurrRoomPath() -> String:
+	return SCENE_PATHS[_status["curr_room"]]
+
+
 # Play music using a's stream.
 # Music from previous scene will be played if there is no stream in a
 # or default to one if there is no previous scene
@@ -96,7 +109,7 @@ func play_music(a : AudioStreamPlayer) -> void:
 		if _status["prev_scene"] != null:
 			a.set_stream(load(MUSIC_FILES[_status["prev_scene"]]))
 		else:
-			a.set_stream(load("res://assets/music/bensound-straight.mp3"))
+			a.set_stream(load(MUSIC_FILES["room1"]))
 
 	music_player = a
 	music_player.play()
@@ -118,6 +131,7 @@ func setup_room(room_info : Dictionary) -> void:
 	save_game()
 	
 	_status["curr_scene"] = room_info["curr_scene"]
+	_status["curr_room"] = _status["curr_scene"]
 	_status["room_completed"] = false
 	_status["room_failed"] = false
 	
@@ -158,11 +172,11 @@ func check_player_status(player,
 
 
 # change scene after saving player's inventory
-func change_room(player, scene : String) -> void:
+func change_room(player, room : String) -> void:
 	PlayerState.set_items(player.inventory)
 	_status["prev_scene"] = _status["curr_scene"]
 	_status["music_pos"] = music_player.get_playback_position()
-	get_tree().change_scene(scene)
+	get_tree().change_scene(SCENE_PATHS[room])
 	
 
 # handle game over actions
@@ -171,7 +185,7 @@ func game_over(time_lbl : Label) -> void:
 	
 	_status["prev_scene"] = _status["curr_scene"]
 	_status["music_pos"] = music_player.get_playback_position()
-	get_tree().change_scene("res://scenes/GameOverScreen.tscn")
+	get_tree().change_scene(SCENE_PATHS["game_over_screen"])
 
 
 # respawn an object to a position
@@ -192,7 +206,7 @@ func handle_pause_menu_selection(id : int, pause_menu : PopupMenu) -> void:
 	if id == 0:
 		pause_menu.hide()
 	else:
-		get_tree().change_scene("res://scenes/MainMenu.tscn")
+		get_tree().change_scene(SCENE_PATHS["main_menu"])
 
 
 func handle_timeout(player, time_lbl : Label, timer : Timer, remaining_time : float) -> float:

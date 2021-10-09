@@ -32,7 +32,7 @@ func _on_NewGameBtn_pressed():
 func _on_ContinueBtn_pressed():
 	Game.reset(false)
 	Game.set_status("prev_scene", "main_menu")
-	get_tree().change_scene(Game.get_status()["curr_scene"])
+	get_tree().change_scene(Game.getCurrRoomPath())
 
 
 func _on_OptionsBtn_pressed():
