@@ -38,7 +38,8 @@ func _process(delta):
 	camera.position.x = player.position.x
 	pause_menu.set_position(player.position)
 	time_lbl.set_position(Vector2(player.position.x, player.position.y - 50))
-	moop.set_target(Vector2(300, 329))
+#	moop.set_target(Vector2(300, 329))
+	moop.set_player_pos(player.position)
 		
 	Game.pause_input_check(pause_menu)
 	Game.check_player_status(player, main_timer, read_timer, time_lbl, remaining_time, reading_time, "game_over_screen")

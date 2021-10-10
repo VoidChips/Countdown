@@ -11,7 +11,8 @@ func _physics_process(delta):
 	position += velocity
 	
 
-func set_velocity(v : Vector2) -> void:
+# aim towards the target using the direction
+func set_target(v : Vector2) -> void:
 	velocity = v * speed
 
 

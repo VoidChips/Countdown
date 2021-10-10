@@ -7,21 +7,21 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 15.0352
 
-[sub_resource type="Curve" id=7]
+[sub_resource type="Curve" id=2]
 min_value = -360.0
 max_value = 360.0
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 146.139 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=8]
-curve = SubResource( 7 )
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
 
-[sub_resource type="Curve" id=5]
+[sub_resource type="Curve" id=4]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.965753, 0.615385 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=6]
-curve = SubResource( 5 )
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 4 )
 
-[sub_resource type="ParticlesMaterial" id=4]
+[sub_resource type="ParticlesMaterial" id=6]
 flag_disable_z = true
 direction = Vector3( 0, 1, 0 )
 spread = 94.19
@@ -33,13 +33,12 @@ orbit_velocity_random = 0.0
 linear_accel = 10.0
 angle = 274.2
 angle_random = 0.52
-angle_curve = SubResource( 8 )
+angle_curve = SubResource( 3 )
 scale = 1.5
-scale_curve = SubResource( 6 )
+scale_curve = SubResource( 5 )
 color = Color( 0.0901961, 0.631373, 0.756863, 1 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "attack"
+[sub_resource type="Animation" id=7]
 length = 0.36
 loop = true
 step = 0.02
@@ -56,8 +55,7 @@ tracks/0/keys = {
 "values": [ 3, 4, 5 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "idle"
+[sub_resource type="Animation" id=8]
 length = 0.36
 loop = true
 step = 0.02
@@ -89,7 +87,7 @@ amount = 10
 lifetime = 2.0
 randomness = 0.15
 local_coords = false
-process_material = SubResource( 4 )
+process_material = SubResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -99,13 +97,10 @@ texture = ExtResource( 1 )
 hframes = 3
 vframes = 2
 frame = 3
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/attack = SubResource( 2 )
-anims/idle = SubResource( 3 )
+anims/attack = SubResource( 7 )
+anims/idle = SubResource( 8 )
 
 [node name="CooldownTimer" type="Timer" parent="."]
 wait_time = 0.5
