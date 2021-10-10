@@ -15,8 +15,8 @@ var music_player : AudioStreamPlayer
 enum PotionTypes {
 	CURE,
 	POISON,
-	SPEED_UP,
 	SPEED_DOWN,
+	SPEED_UP,
 	JUMP_BOOST,
 }
 
