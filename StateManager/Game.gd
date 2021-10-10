@@ -177,7 +177,10 @@ func check_player_status(player,
 		main_timer.stop()
 		player.can_move = false
 		time_lbl.text = "You got %s coins" % money
-		PlayerState.add_money(money)
+		
+		# prevent player from getting infinite money
+		if scene != "game_over_screen":
+			PlayerState.add_money(money)
 		read_timer.start()
 	elif player.is_dead:
 		_status["room_failed"] = true
@@ -187,7 +190,10 @@ func check_player_status(player,
 
 # change scene after saving player's inventory
 func change_room(player, room : String) -> void:
-	PlayerState.set_items(player.inventory)
+	# don't save inventory for game over so that player can't get infinite potions
+	if room != "game_over_screen":
+		PlayerState.set_items(player.inventory)	
+
 	_status["prev_scene"] = _status["curr_scene"]
 	_status["music_pos"] = music_player.get_playback_position()
 	get_tree().change_scene(SCENE_PATHS[room])

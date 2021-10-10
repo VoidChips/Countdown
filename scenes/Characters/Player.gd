@@ -157,7 +157,6 @@ func handle_projectile_hit(hit_state : int) -> void:
 			is_dead = true
 		types.SPEED_DOWN:
 			run_speed /= 2
-			jump_speed /= 2
 		types.SPEED_UP:
 			run_speed *= 2
 		types.JUMP_BOOST:
