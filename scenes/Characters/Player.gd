@@ -13,6 +13,7 @@ var is_jumping := false
 var is_drinking := false
 var is_facing_right := true
 var can_move := true
+var potion_type := -1
 
 
 func _ready():
@@ -61,13 +62,19 @@ func get_input() -> void:
 		
 	# drink potion
 	if drink:
-		if Game.PotionTypes.CURE in inventory["potions"]:
-			if is_facing_right:
-				$AnimationPlayer.play("drink right")
-			else:
-				$AnimationPlayer.play("drink left")
-			$Potion.frame = 0  # set the type of potion's sprite
-			is_drinking = true
+		var potions_list = inventory["potions"]
+		var types := Game.PotionTypes
+		
+		if types.CURE in potions_list:
+			drink_potion(types.CURE)
+		elif types.POISON in potions_list:
+			drink_potion(types.POISON)
+		elif types.SPEED_DOWN in potions_list:
+			drink_potion(types.SPEED_DOWN)
+		elif types.SPEED_UP in potions_list:
+			drink_potion(types.SPEED_UP)
+		elif types.JUMP_BOOST in potions_list:
+			drink_potion(types.JUMP_BOOST)
 
 
 func _physics_process(delta):
@@ -87,25 +94,73 @@ func _physics_process(delta):
 
 	velocity = move_and_slide(velocity, Vector2(0, -1))
 	
-	if PlayerState.get_state("hit"):
-		print("hit!")
-		PlayerState.set_state("hit", false)
+	handle_projectile_hit(PlayerState.get_state("hit"))
 	
 	# detect collision
 #	for i in get_slide_count():
 #		var collision = get_slide_collision(i)
 #		if collision:
 #			var object = collision.collider
-#			print(object)
+
+
+# start drinking a potion
+func drink_potion(type : int) -> void:
+	if is_facing_right:
+		$AnimationPlayer.play("drink right")
+	else:
+		$AnimationPlayer.play("drink left")
+	$Potion.frame = type  # set the type of potion's sprite
+	potion_type = type
+	is_drinking = true
 
 
 # finish drinking when the drinking animation ends
 func finish_drinking() -> void:
+	var types := Game.PotionTypes
+	
 	is_drinking = false
-	inventory["potions"].erase(Game.PotionTypes.CURE)
-	is_poisoned = false
+	inventory["potions"].erase(potion_type)
+	
+	match potion_type:
+		types.CURE:
+			is_poisoned = false
+		types.POISON:
+			is_dead = true
+		types.SPEED_DOWN:
+			run_speed /= 2
+			jump_speed /= 2
+		types.SPEED_UP:
+			run_speed *= 2
+		types.JUMP_BOOST:
+			jump_speed *= 2
+			
+	potion_type = -1
+	
 
 
 # toggle visiblity of potion
 func toggle_potion_visible() -> void:
 	$Potion.visible = not $Potion.visible
+
+
+# give the player a power boost or power down from being hit
+func handle_projectile_hit(hit_state : int) -> void:
+	if hit_state == -1:
+		return
+	
+	var types := Game.PotionTypes
+	
+	match hit_state:
+		types.CURE:
+			is_poisoned = false
+		types.POISON:
+			is_dead = true
+		types.SPEED_DOWN:
+			run_speed /= 2
+			jump_speed /= 2
+		types.SPEED_UP:
+			run_speed *= 2
+		types.JUMP_BOOST:
+			jump_speed *= 2
+			
+	PlayerState.set_state("hit", -1)

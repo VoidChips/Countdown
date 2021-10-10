@@ -4,7 +4,7 @@ var _state := {
 	"money" : 0,
 	"inventory" : {
 		"potions" : [],
-	"hit" : false,
+	"hit" : -1,  # indicates type of projectile the player got hit with
 	},
 }
 
@@ -45,4 +45,4 @@ func reset(b : bool) -> void:
 	if b:
 		_state["money"] = 0
 		_state["inventory"]["potions"] = []
-	_state["hit"] = false
+	_state["hit"] = -1

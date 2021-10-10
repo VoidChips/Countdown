@@ -18,5 +18,5 @@ func set_target(v : Vector2) -> void:
 
 func _on_MoopProjectile_body_entered(body):
 	if body.get_name() == "Player":
-		PlayerState.set_state("hit", true)
+		PlayerState.set_state("hit", Game.PotionTypes.SPEED_DOWN)
 	queue_free()
