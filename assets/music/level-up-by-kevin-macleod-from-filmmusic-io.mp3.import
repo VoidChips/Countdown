@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/level-up-by-kevin-macleod-from-filmmusic-io.mp3-236fd4d9e7c28755dc8e0eb94afd0638.mp3str"
+
+[deps]
+
+source_file="res://assets/music/level-up-by-kevin-macleod-from-filmmusic-io.mp3"
+dest_files=[ "res://.import/level-up-by-kevin-macleod-from-filmmusic-io.mp3-236fd4d9e7c28755dc8e0eb94afd0638.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

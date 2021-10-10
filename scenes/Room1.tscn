@@ -28,6 +28,9 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="CurePotion" parent="." instance=ExtResource( 4 )]
+position = Vector2( 847.597, 154.953 )
+
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 222.232, 180.336 )
 
@@ -64,9 +67,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CurePotion" parent="." instance=ExtResource( 4 )]
-position = Vector2( 847.597, 154.953 )
-
 [node name="RespawnTrigger" type="Area2D" parent="."]
 position = Vector2( 497.251, 378.831 )
 
@@ -77,8 +77,8 @@ shape = SubResource( 2 )
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
 
+[connection signal="body_entered" from="CurePotion" to="." method="_on_CurePotion_body_entered"]
 [connection signal="id_pressed" from="PauseMenu" to="." method="_on_PauseMenu_id_pressed"]
 [connection signal="timeout" from="MainTimer" to="." method="_on_MainTimer_timeout"]
 [connection signal="timeout" from="ReadTimer" to="." method="_on_ReadTimer_timeout"]
-[connection signal="body_entered" from="CurePotion" to="." method="_on_CurePotion_body_entered"]
 [connection signal="body_entered" from="RespawnTrigger" to="." method="_on_RespawnTrigger_body_entered"]

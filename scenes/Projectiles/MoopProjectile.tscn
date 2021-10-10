@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/projectiles/projectile.png" type="Texture" id=1]
+[ext_resource path="res://scenes/Projectiles/MoopProjectile.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 4.9375
+height = 4.625
+
+[node name="MoopProjectile" type="Area2D"]
+gravity = 1.0
+script = ExtResource( 2 )
+speed = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+
+[connection signal="body_entered" from="." to="." method="_on_MoopProjectile_body_entered"]

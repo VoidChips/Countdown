@@ -28,14 +28,17 @@ const SCENE_PATHS := {
 	"options_menu": "res://scenes/OptionsMenu.tscn",
 	"room1": "res://scenes/Room1.tscn",
 	"room2": "res://scenes/Room2.tscn",
+	"room3" : "res://scenes/Room3.tscn",
 	"game_over_screen": "res://scenes/GameOverScreen.tscn",
 }
 
+# music for each scene
 const MUSIC_FILES := {
 	"main_menu": "res://assets/music/destiny-day-by-kevin-macleod-from-filmmusic-io.mp3",
 	"options_menu": "res://assets/music/destiny-day-by-kevin-macleod-from-filmmusic-io.mp3",
 	"room1": "res://assets/music/bensound-straight.mp3",
 	"room2": "res://assets/music/bensound-straight.mp3",
+	"room3" : "res://assets/music/level-up-by-kevin-macleod-from-filmmusic-io.mp3",
 	"game_over_screen": "res://assets/music/bensound-straight.mp3",
 }
 
@@ -63,7 +66,7 @@ func load_game() -> void:
 			print("Unable to open config.cfg. Error code: %s" % error)
 			return
 		_status = file.get_var()
-		PlayerState.set_state(file.get_var())
+		PlayerState.set_states(file.get_var())
 	
 	file.close()
 
@@ -81,7 +84,7 @@ func save_game() -> void:
 		print("Unable to open config.cfg. Error code: %s" % error)
 		return
 	file.store_var(_status)
-	file.store_var(PlayerState.get_state())
+	file.store_var(PlayerState.get_states())
 	file.close()
 
 
@@ -116,6 +119,12 @@ func play_music(a : AudioStreamPlayer) -> void:
 	music_player = a
 	music_player.play()
 	music_player.seek(_status["music_pos"])
+	
+
+# play the next music from the beginning	
+func set_music_beginning(b : bool) -> void:
+	if b:
+		_status["music_pos"] = 0.0
 
 
 # setup scene at the beginning

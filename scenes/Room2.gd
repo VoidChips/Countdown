@@ -48,7 +48,7 @@ func _process(delta):
 			camera.position.y -= 1
 
 	Game.pause_input_check(pause_menu)
-	Game.check_player_status(player, main_timer, read_timer, time_lbl, remaining_time, reading_time, "game_over_screen")
+	Game.check_player_status(player, main_timer, read_timer, time_lbl, remaining_time, reading_time, "room3")
 
 
 # define pause menu actions

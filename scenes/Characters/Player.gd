@@ -87,11 +87,16 @@ func _physics_process(delta):
 
 	velocity = move_and_slide(velocity, Vector2(0, -1))
 	
+	if PlayerState.get_state("hit"):
+		print("hit!")
+		PlayerState.set_state("hit", false)
+	
 	# detect collision
 #	for i in get_slide_count():
 #		var collision = get_slide_collision(i)
 #		if collision:
 #			var object = collision.collider
+#			print(object)
 
 
 # finish drinking when the drinking animation ends

@@ -7,6 +7,7 @@ onready var main_timer := $MainTimer
 onready var read_timer := $ReadTimer
 onready var time_lbl := $TimeLbl
 onready var music_player := $MusicPlayer
+
 var remaining_time := 10.0
 var reading_time := 1
 var room_info := {}

@@ -4,25 +4,26 @@ var _state := {
 	"money" : 0,
 	"inventory" : {
 		"potions" : [],
+	"hit" : false,
 	},
 }
 
 
-func get_state() -> Dictionary:
+func get_states() -> Dictionary:
 	return _state.duplicate(true)
-	
-	
-func set_state(d : Dictionary) -> void:
+
+
+func get_state(key : String):
+	return _state[key]
+
+
+func set_states(d : Dictionary) -> void:
 	_state = d
 
 
-func get_money() -> int:
-	return _state["money"]
+func set_state(key : String, val) -> void:
+	_state[key] = val
 
-
-func set_money(x : int) -> void:
-	_state["money"] = x
-	
 
 # add to total amount of holding money
 func add_money(x : int) -> void:
@@ -40,7 +41,8 @@ func set_items(d : Dictionary) -> void:
 
 
 # reset player state
-func reset() -> void:
-	_state["money"] = 0
-	_state["inventory"]["potions"] = []
-
+func reset(b : bool) -> void:
+	if b:
+		_state["money"] = 0
+		_state["inventory"]["potions"] = []
+	_state["hit"] = false

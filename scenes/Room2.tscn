@@ -32,11 +32,11 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 93.1745, 65.2477 )
-
 [node name="CurePotion" parent="." instance=ExtResource( 3 )]
 position = Vector2( 830.325, 88.2521 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 93.1745, 65.2477 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true

@@ -17,6 +17,7 @@ func _ready():
 	Game.set_status("music_pos", 0.0)
 	Game.set_status("curr_scene", "main_menu")
 	Game.play_music($MusicPlayer)
+	PlayerState.reset(false)
 	
 	if Game.get_status()["is_new_game"]:
 		continueBtn.disabled = true
@@ -30,7 +31,7 @@ func _ready():
 func _on_NewGameBtn_pressed():
 	Game.reset(true)
 	Game.set_status("prev_scene", "main_menu")
-	PlayerState.reset()
+	PlayerState.reset(true)
 	get_tree().change_scene("res://scenes/Room1.tscn")
 
 
