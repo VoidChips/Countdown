@@ -92,8 +92,8 @@ texture = ExtResource( 3 )
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 
-[connection signal="pressed" from="Buttons/NewGameBtn" to="." method="_on_StartBtn_pressed"]
 [connection signal="pressed" from="Buttons/NewGameBtn" to="." method="_on_NewGameBtn_pressed"]
+[connection signal="pressed" from="Buttons/NewGameBtn" to="." method="_on_StartBtn_pressed"]
 [connection signal="pressed" from="Buttons/ContinueBtn" to="." method="_on_ContinueBtn_pressed"]
 [connection signal="pressed" from="Buttons/OptionsBtn" to="." method="_on_OptionsBtn_pressed"]
 [connection signal="pressed" from="Buttons/QuitBtn" to="." method="_on_QuitBtn_pressed"]

@@ -9,6 +9,7 @@ var target := Vector2()
 var is_on_cooldown := false
 var is_tracking := false
 var player_pos := Vector2()
+var direction_to_player := Vector2()
 
 
 func _physics_process(_delta):
@@ -29,7 +30,7 @@ func set_player_pos(v : Vector2) -> void:
 
 # checks if moop found the player in its field of view
 func found_player() -> bool:
-	var direction_to_player := position.direction_to(player_pos)
+	direction_to_player = position.direction_to(player_pos)
 	return direction_to_player.dot(direction) > 0.3
 
 
@@ -37,7 +38,7 @@ func found_player() -> bool:
 func shoot() -> void:
 	var projectile = Projectile.instance()
 	add_child(projectile)
-	projectile.set_target(position.direction_to(player_pos))
+	projectile.set_target(direction_to_player, direction_to_player.dot(direction))
 	cooldown_timer.start()
 	is_on_cooldown = true
 

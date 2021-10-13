@@ -12,8 +12,13 @@ func _physics_process(delta):
 	
 
 # aim towards the target using the direction
-func set_target(v : Vector2) -> void:
-	velocity = v * speed
+func set_target(direction : Vector2, angle : float) -> void:
+	velocity = direction * speed
+	
+	# set the rotation of sprite to match the direction of movement
+	var rotation = rad2deg(acos(angle))
+	rotation = rotation if direction.x < 0 else -rotation
+	rotation_degrees = rotation
 
 
 func _on_MoopProjectile_body_entered(body):
