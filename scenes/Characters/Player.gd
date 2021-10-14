@@ -62,18 +62,17 @@ func get_input() -> void:
 		
 	# drink potion
 	if drink:
-		var potions_list = inventory["potions"]
-		var types := Game.PotionTypes
+		var types = Game.PotionTypes
 		
-		if types.CURE in potions_list:
+		if inventory["cure_potion"] > 0:
 			drink_potion(types.CURE)
-		elif types.POISON in potions_list:
+		elif inventory["poison_potion"] > 0:
 			drink_potion(types.POISON)
-		elif types.SPEED_DOWN in potions_list:
+		elif inventory["speed_down_potion"] > 0:
 			drink_potion(types.SPEED_DOWN)
-		elif types.SPEED_UP in potions_list:
+		elif inventory["speed_up_potion"] > 0:
 			drink_potion(types.SPEED_UP)
-		elif types.JUMP_BOOST in potions_list:
+		elif inventory["jump_boost_potion"] > 0:
 			drink_potion(types.JUMP_BOOST)
 
 
@@ -119,21 +118,26 @@ func finish_drinking() -> void:
 	var types := Game.PotionTypes
 	
 	is_drinking = false
-	inventory["potions"].erase(potion_type)
-	PlayerState.set_items(inventory)
 	
 	match potion_type:
 		types.CURE:
 			is_poisoned = false
+			inventory["cure_potion"] -= 1
 		types.POISON:
 			is_dead = true
+			inventory["poison_potion"] -= 1
 		types.SPEED_DOWN:
 			run_speed /= 2
 			jump_speed /= 2
+			inventory["speed_down_potion"] -= 1
 		types.SPEED_UP:
 			run_speed *= 2
+			inventory["speed_up_potion"] -= 1
 		types.JUMP_BOOST:
 			jump_speed *= 2
+			inventory["jump_boost_potion"] -= 1
+		
+	PlayerState.set_temp_items(inventory)
 			
 	potion_type = -1
 	

@@ -243,6 +243,17 @@ func handle_timeout(player, time_lbl : Label, timer : Timer, remaining_time : fl
 
 func handle_potion_collision(body : Node, player, potion) -> void:
 	if (body.get_name() == "Player"):
-		player.inventory["potions"].push_back(potion.type)
+		match potion.type:
+			PotionTypes.CURE:
+				player.inventory["cure_potion"] += 1
+			PotionTypes.POISON:
+				player.inventory["poison_potion"] += 1
+			PotionTypes.SPEED_DOWN:
+				player.inventory["speed_down_potion"] += 1
+			PotionTypes.SPEED_UP:
+				player.inventory["speed_up_potion"] += 1
+			PotionTypes.JUMP_BOOST:
+				player.inventory["jump_boost_potion"] += 1
+		
 		PlayerState.set_temp_items(player.inventory)
 		potion.queue_free()

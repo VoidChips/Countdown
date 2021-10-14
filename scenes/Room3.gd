@@ -67,6 +67,5 @@ func _on_CurePotion_body_entered(body):
 	Game.handle_potion_collision(body, player, get_node("CurePotion"))
 
 
-
 func _on_SpeedUpPotion_body_entered(body):
 	Game.handle_potion_collision(body, player, get_node("SpeedUpPotion"))

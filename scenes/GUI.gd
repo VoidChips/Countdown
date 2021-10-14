@@ -9,13 +9,15 @@ onready var coins = $HBoxContainer/Coins
 
 
 func _process(delta):
-	var potions = PlayerState.get_temp_items()["potions"]
+#	var potions = PlayerState.get_temp_items()["potions"]
+	var inventory = PlayerState.get_temp_items()
 	var types = Game.PotionTypes
-	var cure_count = count_potions(types.CURE, potions)	
-	var poison_count = count_potions(types.POISON, potions)
-	var speed_down_count = count_potions(types.SPEED_DOWN, potions)
-	var speed_up_count = count_potions(types.SPEED_UP, potions)
-	var jump_boost_count = count_potions(types.JUMP_BOOST, potions)
+	
+	var cure_count = inventory["cure_potion"]
+	var poison_count = inventory["poison_potion"]
+	var speed_down_count = inventory["speed_down_potion"]
+	var speed_up_count = inventory["speed_up_potion"]
+	var jump_boost_count = inventory["jump_boost_potion"]
 	var coin_count = PlayerState.get_state("temp_money")
 	
 	# update the number of potions and money in the gui

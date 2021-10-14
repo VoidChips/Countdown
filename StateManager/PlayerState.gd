@@ -4,10 +4,18 @@ var _state := {
 	"money" : 0,
 	"temp_money" : 0,
 	"inventory" : {
-		"potions" : [],
+		"cure_potion" : 0,
+		"poison_potion" : 0,
+		"speed_down_potion" : 0,
+		"speed_up_potion" : 0,
+		"jump_boost_potion" : 0,
 	},
 	"temp_inventory" : {
-		"potions" : [],
+		"cure_potion" : 0,
+		"poison_potion" : 0,
+		"speed_down_potion" : 0,
+		"speed_up_potion" : 0,
+		"jump_boost_potion" : 0,
 	},
 	"hit" : -1,  # indicates type of projectile the player got hit with
 }
@@ -61,6 +69,16 @@ func reset(b : bool) -> void:
 	if b:
 		_state["money"] = 0
 		_state["temp_money"] = 0
-		_state["inventory"]["potions"] = []
-		_state["temp_inventory"]["potions"] = []
+		_state["inventory"]["cure_potion"] = 0
+		_state["inventory"]["poison_potion"] = 0
+		_state["inventory"]["speed_down_potion"] = 0
+		_state["inventory"]["speed_up_potion"] = 0
+		_state["inventory"]["jump_boost_potion"] = 0
+		
+		_state["temp_inventory"]["cure_potion"] = 0
+		_state["temp_inventory"]["poison_potion"] = 0
+		_state["temp_inventory"]["speed_down_potion"] = 0
+		_state["temp_inventory"]["speed_up_potion"] = 0
+		_state["temp_inventory"]["jump_boost_potion"] = 0
+		
 	_state["hit"] = -1
