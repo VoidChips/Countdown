@@ -153,6 +153,8 @@ func setup_room(room_info : Dictionary) -> void:
 	pause_menu.set_position(spawn_point)
 	time_lbl.set_position(Vector2(player.position.x, player.position.y - 50))
 	time_lbl.text = str(remaining_time)
+	PlayerState.set_state("temp_money", PlayerState.get_state("money"))
+	PlayerState.set_temp_items(PlayerState.get_items())
 	main_timer.start()
 	
 
@@ -242,4 +244,5 @@ func handle_timeout(player, time_lbl : Label, timer : Timer, remaining_time : fl
 func handle_potion_collision(body : Node, player, potion) -> void:
 	if (body.get_name() == "Player"):
 		player.inventory["potions"].push_back(potion.type)
+		PlayerState.set_temp_items(player.inventory)
 		potion.queue_free()

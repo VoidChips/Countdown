@@ -120,6 +120,7 @@ func finish_drinking() -> void:
 	
 	is_drinking = false
 	inventory["potions"].erase(potion_type)
+	PlayerState.set_items(inventory)
 	
 	match potion_type:
 		types.CURE:
