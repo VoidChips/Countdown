@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/items/potions.png" type="Texture" id=1]
 [ext_resource path="res://assets/items/coin.png" type="Texture" id=2]
-[ext_resource path="res://assets/background/potion_background.png" type="Texture" id=3]
+[ext_resource path="res://assets/background/potion_background1.png" type="Texture" id=3]
 [ext_resource path="res://scenes/GUI.gd" type="Script" id=4]
 
 [sub_resource type="AtlasTexture" id=1]

@@ -26,6 +26,12 @@ func get_input() -> void:
 	var left := Input.is_action_pressed('ui_left')
 	var jump := Input.is_action_just_pressed("jump")
 	var drink := Input.is_action_just_pressed("drink")
+	var select_cure_potion := Input.is_action_just_pressed("select_cure_potion")
+	var select_poison_potion := Input.is_action_just_pressed("select_poison_potion")
+	var select_speed_down_potion := Input.is_action_just_pressed("select_speed_down_potion")
+	var select_speed_up_potion := Input.is_action_just_pressed("select_speed_up_potion")
+	var select_jump_boost_potion := Input.is_action_just_pressed("select_jump_boost_potion")
+	var types := Game.PotionTypes
 	
 	velocity.x = 0
 
@@ -59,21 +65,37 @@ func get_input() -> void:
 			$AnimationPlayer.play("walk")
 	elif is_on_floor():
 		$AnimationPlayer.play("idle")
-		
+	
+	# select potion
+	if select_cure_potion:
+		Game.set_status("selected_potion", types.CURE)
+	elif select_poison_potion:
+		Game.set_status("selected_potion", types.POISON)
+	elif select_speed_down_potion:
+		Game.set_status("selected_potion", types.SPEED_DOWN)
+	elif select_speed_up_potion:
+		Game.set_status("selected_potion", types.SPEED_UP)
+	elif select_jump_boost_potion:
+		Game.set_status("selected_potion", types.JUMP_BOOST)
+	
 	# drink potion
 	if drink:
-		var types = Game.PotionTypes
-		
-		if inventory["cure_potion"] > 0:
-			drink_potion(types.CURE)
-		elif inventory["poison_potion"] > 0:
-			drink_potion(types.POISON)
-		elif inventory["speed_down_potion"] > 0:
-			drink_potion(types.SPEED_DOWN)
-		elif inventory["speed_up_potion"] > 0:
-			drink_potion(types.SPEED_UP)
-		elif inventory["jump_boost_potion"] > 0:
-			drink_potion(types.JUMP_BOOST)
+		match Game.get_status()["selected_potion"]:
+			types.CURE:
+				if inventory["cure_potion"] > 0:
+					drink_potion(types.CURE)
+			types.POISON:
+				if inventory["poison_potion"] > 0:
+					drink_potion(types.POISON)
+			types.SPEED_DOWN:
+				if inventory["speed_down_potion"] > 0:
+					drink_potion(types.SPEED_DOWN)
+			types.SPEED_UP:
+				if inventory["speed_up_potion"] > 0:
+					drink_potion(types.SPEED_UP)
+			types.JUMP_BOOST:
+				if inventory["jump_boost_potion"] > 0:
+					drink_potion(types.JUMP_BOOST)
 
 
 func _physics_process(delta):

@@ -6,6 +6,8 @@ onready var speed_down_potion = $HBoxContainer/Potions/SpeedDownPotion
 onready var speed_up_potion = $HBoxContainer/Potions/SpeedUpPotion
 onready var jump_boost_potion = $HBoxContainer/Potions/JumpBoostPotion
 onready var coins = $HBoxContainer/Coins
+onready var unselected_potion_texture := preload("res://assets/background/potion_background1.png")
+onready var selected_potion_texture := preload("res://assets/background/potion_background2.png")
 
 
 func _process(delta):
@@ -27,6 +29,20 @@ func _process(delta):
 	speed_up_potion.get_node("Background/Count").text = str(speed_up_count)
 	jump_boost_potion.get_node("Background/Count").text = str(jump_boost_count)
 	coins.get_node("Count").text = str(coin_count)
+	
+	# update the background texture of potions
+	unselect_potions()
+	match Game.get_status()["selected_potion"]:
+		types.CURE:
+			cure_potion.get_node("Background").texture = selected_potion_texture
+		types.POISON:
+			poison_potion.get_node("Background").texture = selected_potion_texture
+		types.SPEED_DOWN:
+			speed_down_potion.get_node("Background").texture = selected_potion_texture
+		types.SPEED_UP:
+			speed_up_potion.get_node("Background").texture = selected_potion_texture
+		types.JUMP_BOOST:
+			jump_boost_potion.get_node("Background").texture = selected_potion_texture
 
 
 # count the number of a potion type in list of potions
@@ -38,3 +54,12 @@ func count_potions(type : int, potions : Array) -> int:
 			count += 1
 			
 	return count
+
+
+# unselect all potions
+func unselect_potions() -> void:
+	cure_potion.get_node("Background").texture = unselected_potion_texture
+	poison_potion.get_node("Background").texture = unselected_potion_texture
+	speed_down_potion.get_node("Background").texture = unselected_potion_texture
+	speed_up_potion.get_node("Background").texture = unselected_potion_texture
+	jump_boost_potion.get_node("Background").texture = unselected_potion_texture

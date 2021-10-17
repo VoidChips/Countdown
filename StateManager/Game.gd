@@ -7,6 +7,7 @@ var _status := {
 	"curr_room" : "room1",
 	"room_completed" : false,
 	"room_failed" : false,
+	"selected_potion" : 0,
 	"music_pos" : 0.0,
 }
 
@@ -94,6 +95,7 @@ func reset(resetAll : bool) -> void:
 	if resetAll:
 		_status["is_new_game"] = true
 		_status["curr_scene_path"] = "res://scenes/Room1.tscn"
+		_status["selected_potion"] = 0
 	
 	_status["prev_scene"] = null
 	_status["room_completed"] = false
