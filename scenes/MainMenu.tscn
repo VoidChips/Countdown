@@ -1,9 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/Noto_Sans_JP/NotoSansJP-Regular.otf" type="DynamicFontData" id=2]
 [ext_resource path="res://assets/background/main menu.png" type="Texture" id=3]
 [ext_resource path="res://assets/music/destiny-day-by-kevin-macleod-from-filmmusic-io.mp3" type="AudioStream" id=4]
+[ext_resource path="res://assets/menu/main menu/new_game_btn.png" type="Texture" id=5]
+[ext_resource path="res://assets/menu/main menu/options_btn.png" type="Texture" id=6]
+[ext_resource path="res://assets/menu/main menu/continue_btn.png" type="Texture" id=7]
+[ext_resource path="res://assets/menu/main menu/quit_btn.png" type="Texture" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -22,10 +26,8 @@ anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = 59.1889
 margin_top = -99.8918
-margin_right = 204.189
+margin_right = 201.189
 margin_bottom = 120.108
-size_flags_horizontal = 3
-size_flags_vertical = 3
 custom_constants/separation = 20
 alignment = 1
 __meta__ = {
@@ -33,44 +35,47 @@ __meta__ = {
 }
 
 [node name="NewGameBtn" type="Button" parent="Buttons"]
-margin_right = 145.0
-margin_bottom = 39.0
+margin_right = 142.0
+margin_bottom = 46.0
 rect_pivot_offset = Vector2( -235.407, -35.9795 )
 focus_neighbour_top = NodePath("../QuitBtn")
-size_flags_vertical = 3
 keep_pressed_outside = true
-text = "Start"
+icon = ExtResource( 5 )
+flat = true
 
 [node name="ContinueBtn" type="Button" parent="Buttons"]
-margin_top = 59.0
-margin_right = 145.0
-margin_bottom = 99.0
+margin_top = 66.0
+margin_right = 142.0
+margin_bottom = 112.0
 rect_pivot_offset = Vector2( -235.407, -35.9795 )
 focus_neighbour_top = NodePath("../NewGameBtn")
 focus_neighbour_bottom = NodePath("../OptionsBtn")
 size_flags_vertical = 3
 keep_pressed_outside = true
-text = "Continue"
+icon = ExtResource( 7 )
+flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="OptionsBtn" type="Button" parent="Buttons"]
-margin_top = 119.0
-margin_right = 145.0
-margin_bottom = 159.0
+margin_top = 132.0
+margin_right = 142.0
+margin_bottom = 178.0
 focus_neighbour_top = NodePath("../ContinueBtn")
 focus_neighbour_bottom = NodePath("../QuitBtn")
 size_flags_vertical = 3
-text = "Options"
+icon = ExtResource( 6 )
+flat = true
 
 [node name="QuitBtn" type="Button" parent="Buttons"]
-margin_top = 179.0
-margin_right = 145.0
-margin_bottom = 219.0
+margin_top = 198.0
+margin_right = 142.0
+margin_bottom = 244.0
 focus_neighbour_bottom = NodePath("../NewGameBtn")
 size_flags_vertical = 3
-text = "Quit"
+icon = ExtResource( 8 )
+flat = true
 
 [node name="Title" type="Label" parent="."]
 margin_left = 272.643

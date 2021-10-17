@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/version.png-93e23864b844a8014cea749804fae14c.stex"
+path="res://.import/potion_background1.png-45b504e346db248d4749ce4fa163c12a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/main menu/version.png"
-dest_files=[ "res://.import/version.png-93e23864b844a8014cea749804fae14c.stex" ]
+source_file="res://assets/menu/potion_background1.png"
+dest_files=[ "res://.import/potion_background1.png-45b504e346db248d4749ce4fa163c12a.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

@@ -6,8 +6,8 @@ onready var speed_down_potion = $HBoxContainer/Potions/SpeedDownPotion
 onready var speed_up_potion = $HBoxContainer/Potions/SpeedUpPotion
 onready var jump_boost_potion = $HBoxContainer/Potions/JumpBoostPotion
 onready var coins = $HBoxContainer/Coins
-onready var unselected_potion_texture := preload("res://assets/background/potion_background1.png")
-onready var selected_potion_texture := preload("res://assets/background/potion_background2.png")
+onready var unselected_potion_texture := preload("res://assets/menu/potion_background1.png")
+onready var selected_potion_texture := preload("res://assets/menu/potion_background2.png")
 
 
 func _process(delta):
