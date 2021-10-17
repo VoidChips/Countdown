@@ -27,7 +27,7 @@ atlas = ExtResource( 1 )
 region = Rect2( 136, 2, 16, 30 )
 
 [sub_resource type="DynamicFont" id=6]
-size = 14
+size = 12
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 5 )
@@ -45,7 +45,7 @@ __meta__ = {
 }
 
 [node name="Potions" type="HBoxContainer" parent="HBoxContainer"]
-margin_right = 587.0
+margin_right = 589.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 0, 40 )
 size_flags_horizontal = 3
@@ -219,7 +219,7 @@ align = 2
 valign = 1
 
 [node name="Coins" type="HBoxContainer" parent="HBoxContainer"]
-margin_left = 591.0
+margin_left = 593.0
 margin_right = 620.0
 margin_bottom = 40.0
 alignment = 2
@@ -232,8 +232,8 @@ stretch_mode = 4
 
 [node name="Count" type="Label" parent="HBoxContainer/Coins"]
 margin_left = 20.0
-margin_top = 9.0
-margin_right = 29.0
-margin_bottom = 31.0
+margin_top = 11.0
+margin_right = 27.0
+margin_bottom = 29.0
 custom_fonts/font = SubResource( 6 )
 text = "0"

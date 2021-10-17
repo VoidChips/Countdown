@@ -11,6 +11,7 @@
 [ext_resource path="res://scenes/GUI.tscn" type="PackedScene" id=9]
 
 [sub_resource type="DynamicFont" id=1]
+size = 14
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 7 )

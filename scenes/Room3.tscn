@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/tileset/nature.tres" type="TileSet" id=1]
 [ext_resource path="res://scenes/Items/Potion.tscn" type="PackedScene" id=2]
@@ -8,8 +8,15 @@
 [ext_resource path="res://scenes/PauseMenu.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/music/level-up-by-kevin-macleod-from-filmmusic-io.mp3" type="AudioStream" id=7]
 [ext_resource path="res://scenes/GUI.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/fonts/Noto_Sans_JP/NotoSansJP-Bold.otf" type="DynamicFontData" id=9]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="DynamicFont" id=1]
+size = 14
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 9 )
+
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 912.566, 20.8534 )
 
 [node name="Room3" type="Node2D"]
@@ -57,6 +64,7 @@ items = [ "Resume", null, 0, false, false, 0, 0, null, "", false, "Main Menu", n
 [node name="TimeLbl" type="Label" parent="."]
 margin_right = 40.0
 margin_bottom = 14.0
+custom_fonts/font = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
@@ -71,7 +79,7 @@ position = Vector2( 128.434, 470.331 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RespawnTrigger"]
 position = Vector2( -60, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [connection signal="body_entered" from="CurePotion" to="." method="_on_CurePotion_body_entered"]
 [connection signal="body_entered" from="SpeedUpPotion" to="." method="_on_SpeedUpPotion_body_entered"]
