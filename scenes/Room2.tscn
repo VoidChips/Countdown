@@ -6,12 +6,11 @@
 [ext_resource path="res://scenes/PauseMenu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/Room2.gd" type="Script" id=5]
 [ext_resource path="res://assets/background/sky.png" type="Texture" id=6]
-[ext_resource path="res://assets/fonts/Noto_Sans_JP/NotoSansJP-Bold.otf" type="DynamicFontData" id=7]
+[ext_resource path="res://assets/fonts/Minecraft.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://assets/music/bensound-straight.mp3" type="AudioStream" id=8]
 [ext_resource path="res://scenes/GUI.tscn" type="PackedScene" id=9]
 
 [sub_resource type="DynamicFont" id=1]
-size = 14
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 7 )

@@ -17,4 +17,6 @@ nature platformer tileset 16x16 - rotting pixels
 [Font]
 
 noto sans jp - google
+Minecraft by Craftron Gaming
+Pixel Operator by Jayvee Enaguas
 

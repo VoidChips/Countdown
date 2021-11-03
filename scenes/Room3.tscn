@@ -8,10 +8,9 @@
 [ext_resource path="res://scenes/PauseMenu.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/music/level-up-by-kevin-macleod-from-filmmusic-io.mp3" type="AudioStream" id=7]
 [ext_resource path="res://scenes/GUI.tscn" type="PackedScene" id=8]
-[ext_resource path="res://assets/fonts/Noto_Sans_JP/NotoSansJP-Bold.otf" type="DynamicFontData" id=9]
+[ext_resource path="res://assets/fonts/Minecraft.ttf" type="DynamicFontData" id=9]
 
 [sub_resource type="DynamicFont" id=1]
-size = 14
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 9 )
