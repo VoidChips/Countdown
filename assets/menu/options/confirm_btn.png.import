@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/potion_background1.png-45b504e346db248d4749ce4fa163c12a.stex"
+path="res://.import/confirm_btn.png-6e1b8d12cc9d3dff505e4301264e3378.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/menu/potion_background1.png"
-dest_files=[ "res://.import/potion_background1.png-45b504e346db248d4749ce4fa163c12a.stex" ]
+source_file="res://assets/menu/options/confirm_btn.png"
+dest_files=[ "res://.import/confirm_btn.png-6e1b8d12cc9d3dff505e4301264e3378.stex" ]
 
 [params]
 

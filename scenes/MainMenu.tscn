@@ -4,10 +4,10 @@
 [ext_resource path="res://assets/fonts/Minecraft.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://assets/background/main menu.png" type="Texture" id=3]
 [ext_resource path="res://assets/music/destiny-day-by-kevin-macleod-from-filmmusic-io.mp3" type="AudioStream" id=4]
-[ext_resource path="res://assets/menu/main menu/new_game_btn.png" type="Texture" id=5]
-[ext_resource path="res://assets/menu/main menu/options_btn.png" type="Texture" id=6]
-[ext_resource path="res://assets/menu/main menu/continue_btn.png" type="Texture" id=7]
-[ext_resource path="res://assets/menu/main menu/quit_btn.png" type="Texture" id=8]
+[ext_resource path="res://assets/menu/main/new_game_btn.png" type="Texture" id=5]
+[ext_resource path="res://assets/menu/main/options_btn.png" type="Texture" id=6]
+[ext_resource path="res://assets/menu/main/continue_btn.png" type="Texture" id=7]
+[ext_resource path="res://assets/menu/main/quit_btn.png" type="Texture" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
