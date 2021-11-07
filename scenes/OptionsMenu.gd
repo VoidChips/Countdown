@@ -1,15 +1,13 @@
 extends Control
 
+onready var resolution_lbl := $Options/ResolutionOption/ResolutionLbl
 onready var resolution_btn := $Options/ResolutionOption/ResolutionBtn
 onready var fullscreen_checkbox := $Options/FullscreenOption/FullscreenCheckBox
-onready var upscale_checkbox := $Options/UpscaleOption/UpscaleCheckBox
-onready var upscale_lbl := $Options/UpscaleOption/UpscaleLbl
 onready var confirm_btn := $Options/ConfirmBtn
 onready var options := $Options
 onready var settings := Config.get_settings()
 onready var resolution = settings["screen"]["window_size"]
 onready var is_fullscreen = settings["screen"]["is_fullscreen"]
-onready var is_upscale = settings["screen"]["is_upscale"]
 
 
 func _ready():
@@ -31,15 +29,8 @@ func _ready():
 		disable_invalid_resolutions()
 		fullscreen_checkbox.pressed = false
 		
-	upscale_checkbox.pressed = is_upscale
-		
 	select_current_resolution()
 	confirm_btn.disabled = true
-
-	print("resolution: %s" % str(resolution))
-	print("rendered resolution: %s" % str(get_parent().get_size()))
-	print("fullscreen: %s" % str(is_fullscreen))
-	print("upscale: %s" % str(is_upscale))
 
 
 # get the resolution from text
@@ -121,12 +112,6 @@ func _on_ResolutionBtn_item_selected(index):
 		4:
 			resolution = Vector2(3840, 2160)
 	
-	if is_base_res:
-		upscale_lbl.set("custom_colors/font_color", Color("A0A0A0"))
-	else:
-		upscale_lbl.set("custom_colors/font_color", Color("ffffff"))
-	
-	upscale_checkbox.set_disabled(is_base_res)
 	confirm_btn.disabled = false
 
 
@@ -136,17 +121,13 @@ func _on_FullscreenCheckBox_toggled(button_pressed):
 	confirm_btn.disabled = false
 	
 	if is_fullscreen:
+		resolution_lbl.set("custom_colors/font_color", Color("A0A0A0"))
+		resolution_btn.set("custom_colors/font_color", Color("A0A0A0"))
 		disable_all_resolutions()
 	else:
+		resolution_lbl.set("custom_colors/font_color", Color("ffffff"))
+		resolution_btn.set("custom_colors/font_color", Color("ffffff"))
 		enable_valid_resolutions()
-
-
-# toggle upscale
-# If checked, will render the game at the windowed resolution or max resolution at fullscreen.
-# By default, the game will always render at the base resolution even with different window sizes.
-func _on_UpscaleCheckBox_toggled(button_pressed):
-	is_upscale = button_pressed
-	confirm_btn.disabled = false
 
 
 # apply changes
@@ -155,23 +136,11 @@ func _on_ConfirmBtn_pressed():
 	OS.window_fullscreen = is_fullscreen
 	OS.window_size = resolution
 	
-	if is_upscale:
-		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_KEEP, Vector2(640, 360))
-	else:
-		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_VIEWPORT, SceneTree.STRETCH_ASPECT_KEEP, Vector2(640, 360))
-	
-	
 	Config.set_setting("screen", "window_size", resolution)
 	Config.set_setting("screen", "is_fullscreen", is_fullscreen)
-	Config.set_setting("screen", "is_upscale", is_upscale)
 	Config.save_settings()
 	
 	confirm_btn.disabled = true
-
-	print("resolution: %s" % str(resolution))
-	print("rendered resolution: %s" % str(get_parent().get_size()))
-	print("fullscreen: %s" % str(is_fullscreen))
-	print("upscale: %s" % str(is_upscale))
 
 
 # return to main menu

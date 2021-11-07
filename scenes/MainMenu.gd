@@ -8,10 +8,6 @@ func _ready():
 	var settings := Config.get_settings()
 	OS.window_fullscreen = settings["screen"]["is_fullscreen"]
 	OS.window_size = settings["screen"]["window_size"]
-	if settings["screen"]["is_upscale"]:
-		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_KEEP, Vector2(640, 360))
-	else:
-		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_VIEWPORT, SceneTree.STRETCH_ASPECT_KEEP, Vector2(640, 360))
 	
 	# reset music_pos before playing music so that it starts from the beginning
 	Game.set_status("music_pos", 0.0)

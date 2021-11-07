@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/OptionsMenu.gd" type="Script" id=1]
 [ext_resource path="res://assets/music/destiny-day-by-kevin-macleod-from-filmmusic-io.mp3" type="AudioStream" id=2]
@@ -13,9 +13,6 @@ font_data = ExtResource( 5 )
 font_data = ExtResource( 5 )
 
 [sub_resource type="DynamicFont" id=2]
-font_data = ExtResource( 5 )
-
-[sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 5 )
 
 [node name="OptionsMenu" type="Control"]
@@ -90,27 +87,10 @@ margin_left = 78.0
 margin_right = 360.0
 margin_bottom = 24.0
 
-[node name="UpscaleOption" type="HSplitContainer" parent="Options"]
+[node name="ConfirmBtn" type="Button" parent="Options"]
 margin_top = 54.0
 margin_right = 360.0
-margin_bottom = 78.0
-
-[node name="UpscaleLbl" type="Label" parent="Options/UpscaleOption"]
-margin_top = 4.0
-margin_right = 63.0
-margin_bottom = 20.0
-custom_fonts/font = SubResource( 3 )
-text = "Upscale    "
-
-[node name="UpscaleCheckBox" type="CheckBox" parent="Options/UpscaleOption"]
-margin_left = 75.0
-margin_right = 360.0
-margin_bottom = 24.0
-
-[node name="ConfirmBtn" type="Button" parent="Options"]
-margin_top = 82.0
-margin_right = 360.0
-margin_bottom = 108.0
+margin_bottom = 80.0
 icon = ExtResource( 3 )
 flat = true
 
@@ -120,5 +100,4 @@ stream = ExtResource( 2 )
 [connection signal="pressed" from="BackBtn" to="." method="_on_BackBtn_pressed"]
 [connection signal="item_selected" from="Options/ResolutionOption/ResolutionBtn" to="." method="_on_ResolutionBtn_item_selected"]
 [connection signal="toggled" from="Options/FullscreenOption/FullscreenCheckBox" to="." method="_on_FullscreenCheckBox_toggled"]
-[connection signal="toggled" from="Options/UpscaleOption/UpscaleCheckBox" to="." method="_on_UpscaleCheckBox_toggled"]
 [connection signal="pressed" from="Options/ConfirmBtn" to="." method="_on_ConfirmBtn_pressed"]
