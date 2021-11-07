@@ -59,7 +59,7 @@ func disable_invalid_resolutions():
 		var res := get_resolution(res_text)
 		
 		if screen_size[0] < res[0] and screen_size[1] < res[1]:
-			resolution_btn.set_item_disabled(i, false)
+			resolution_btn.set_item_disabled(i, true)
 
 
 # enable resolutions if they are valid
