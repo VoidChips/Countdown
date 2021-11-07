@@ -4,7 +4,7 @@ extends Control
 func _ready():
 	Game.set_status("curr_scene", "game_over_screen")
 	Game.play_music($MusicPlayer)
-	$Menu/Buttons/RetryBtn.grab_focus()
+	$Menu/HBoxContainer/Buttons/RetryBtn.grab_focus()
 
 
 func _on_RetryBtn_pressed():

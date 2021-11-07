@@ -21,7 +21,6 @@ func _ready():
 		continueBtn.disabled = false
 	
 	$Buttons/NewGameBtn.grab_focus()
-	
 
 
 func _on_NewGameBtn_pressed():
